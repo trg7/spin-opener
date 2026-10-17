@@ -1,0 +1,7 @@
+SPIN OPENER — Claude Code Starter Kit
+
+1. Place the master prompt, style guide, and your reference imagery in the project.
+2. Give Claude Code the master prompt and ask it to execute Stage 0 only.
+3. The master prompt already includes Git commit/checkpoint rules.
+4. SPIN_OPENER_Git_Workflow_AGENTS.md is an optional standalone policy reference; ask Claude to merge its rules into root AGENTS.md (do not replace other project instructions).
+5. Review Stage 0 before authorizing implementation.

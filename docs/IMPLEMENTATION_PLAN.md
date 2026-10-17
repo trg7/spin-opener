@@ -1,0 +1,54 @@
+# Implementation plan
+
+Stop for user review after each stage. Commits listed are the intended focused milestones.
+
+## Stage 0 — Foundation ✅
+
+- [x] Inspect starter kit, style guide, three boards; audit (`REFERENCE_AUDIT.md`)
+- [x] Copy originals into `references/`
+- [x] Crop provisional assets from AI board (`ASSET_MANIFEST.md`)
+- [x] Tooling: Vite, TS strict, Tailwind v4, ESLint, Prettier, Vitest
+- [x] Tokens, copy, catalogue, asset manifest, commerce types + adapter interface
+- [x] Data tests (token parity, contrast, catalogue rules, manifest files)
+- [x] `AGENTS.md` + docs; baseline commit
+
+## Stage 1 — Static fidelity (priority order)
+
+1. Playwright + screenshot script (390/768/1440) — `chore(tooling)`
+2. UI primitives: Button, Eyebrow, Price, ResponsiveImage (fallback + badge), icons, QuantityStepper, Swatch — `feat(ui)`
+3. Technical SVGs: ConstructionGeometry, TechnicalViews, AnnotationCallout — `feat(technical)`
+4. Header (wordmark placeholder, nav, bag), footer, section shell — `feat(layout)`
+5. Hero (mobile first) — `feat(hero)`
+6. Spin, Reveal, Lifestyle + stand (static end states) — `feat(story)`
+7. Configurator (static, interactive selection UI) + Details + Manufacturing — `feat(configurator)`, `feat(details)`
+8. Sticky purchase bar + static cart drawer UI — `feat(layout)`
+9. Screenshot comparison vs boards, mismatch report, fixes — `fix(visual)`
+
+## Stage 2 — Motion
+
+1. GSAP provider, `useReducedMotion`, matchMedia contexts — `feat(motion)`
+2. Hero intro + scroll push-in
+3. Pinned spin sequence (checkpoint commit before) — `feat(motion): add scroll-driven spin`
+4. Bottle reveal, lifestyle parallax, details draw, manufacturing pan
+5. Test: reverse scroll, resize, reduced motion, anchor nav, iOS touch
+
+## Stage 3 — Commerce
+
+1. `mockCommerceAdapter` + unit tests (bundle-as-one-line, TBC, bounds) — `feat(cart)`
+2. Zustand cart store + provider
+3. Wire configurator, hero CTA, sticky bar → add to bag; drawer lines/qty/remove; added-to-bag confirmation
+4. Mock checkout notice; component tests
+
+## Stage 4 — Refinement
+
+Mobile perf, type/spacing/timing polish, a11y audit, Lighthouse, metadata/OG, real-vs-placeholder register, Shopify swap notes.
+
+## Blocking inputs (ask client)
+
+1. Original wordmark (SVG preferred)
+2. Real product photographs (especially underside/opener mechanism)
+3. Confirmed dimensions, materials, care
+4. Confirmed colour range (top, stand)
+5. Stand + bundle prices
+6. Shipping/returns/contact copy
+7. Typeface choice/licence
