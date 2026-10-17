@@ -1,8 +1,10 @@
+import { useRef } from 'react'
 import { SideView, TopView } from '@/components/technical/TechnicalDrawing'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
+import { useDetailsMotion } from './useDetailsMotion'
 
 const copy = siteCopy.details
 const macros = [assets.detailTexture, assets.detailRing, assets.detailTip]
@@ -12,8 +14,11 @@ const macros = [assets.detailTexture, assets.detailRing, assets.detailTip]
  * placeholder until the client supplies real data. TODO(PRODUCT_DATA)
  */
 export function DetailsSection() {
+  const ref = useRef<HTMLElement>(null)
+  useDetailsMotion(ref)
   return (
     <section
+      ref={ref}
       id="details"
       aria-labelledby="details-heading"
       className="page-x border-t border-grid py-20 lg:py-28"
@@ -28,7 +33,11 @@ export function DetailsSection() {
           </div>
           <dl className="divide-y divide-grid border-y border-grid">
             {copy.specs.map((s) => (
-              <div key={s.term} className="grid grid-cols-[7.5rem_1fr] gap-4 py-4 text-sm">
+              <div
+                key={s.term}
+                data-details
+                className="grid grid-cols-[7.5rem_1fr] gap-4 py-4 text-sm"
+              >
                 <dt className="font-utility text-label font-medium uppercase text-ink-muted">
                   {s.term}
                 </dt>
@@ -38,7 +47,7 @@ export function DetailsSection() {
           </dl>
         </div>
 
-        <figure className="flex flex-col gap-6 lg:col-span-8">
+        <figure data-details className="flex flex-col gap-6 lg:col-span-8">
           <div className="grid grid-cols-[1fr_auto] items-center gap-6 text-ink-muted md:gap-12">
             <SideView
               className="w-full max-w-[24rem]"
@@ -54,7 +63,7 @@ export function DetailsSection() {
 
         <ul className="grid grid-cols-3 gap-3 lg:col-span-8 lg:col-start-5 lg:gap-4">
           {macros.map((m) => (
-            <li key={m.src}>
+            <li key={m.src} data-details>
               <ResponsiveImage
                 asset={m}
                 className="aspect-[2/3] overflow-hidden lg:aspect-square"

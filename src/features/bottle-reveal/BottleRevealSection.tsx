@@ -1,28 +1,50 @@
+import { useRef } from 'react'
 import { StoryBand } from '@/components/layout/StoryBand'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
+import { useRevealMotion } from './useRevealMotion'
 
 const copy = siteCopy.reveal
 
 /**
- * 03 Reveal — static end state (bottle being opened). Stage 2 starts on bottleUnderside
- * and crossfades to this frame. Imagery is AI-invented: replace with the real mechanism.
+ * 03 Reveal — static end state is the bottle being opened. With motion, the frame opens from
+ * an inset and (≥768) crossfades from the underside close-up. Imagery is AI-invented:
+ * replace with the real mechanism.
  */
 export function BottleRevealSection() {
+  const ref = useRef<HTMLElement>(null)
+  useRevealMotion(ref)
+
   return (
     <StoryBand
+      ref={ref}
       id="reveal"
       index={copy.index}
       heading={copy.headingLines}
       support={copy.support}
       media={
-        <ResponsiveImage
-          asset={assets.bottleReveal}
-          mobileAsset={assets.bottleRevealPortrait}
-          className="absolute inset-0"
-          imgClassName="object-cover object-[50%_35%]"
-        />
+        <div data-reveal="frame" className="absolute inset-0 overflow-hidden">
+          <div data-reveal="layer" className="absolute inset-0">
+            <ResponsiveImage
+              asset={assets.bottleReveal}
+              mobileAsset={assets.bottleRevealPortrait}
+              className="absolute inset-0"
+              imgClassName="object-cover object-[50%_35%]"
+            />
+          </div>
+          <div
+            data-reveal="underside"
+            className="invisible absolute inset-0 opacity-0 max-md:hidden"
+          >
+            <ResponsiveImage
+              asset={assets.bottleUnderside}
+              className="absolute inset-0"
+              imgClassName="object-cover"
+              hideBadge
+            />
+          </div>
+        </div>
       }
     />
   )
