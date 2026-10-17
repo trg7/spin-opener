@@ -10,7 +10,7 @@ dist-ssr/
 coverage/
 playwright-report/
 test-results/
-screenshots/tmp/
+screenshots/
 
 # env & secrets
 .env
