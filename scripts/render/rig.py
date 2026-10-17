@@ -22,6 +22,9 @@ CENTER = mathutils.Vector((0, 0, ZMIN + H * 0.5))
 def srgb_to_lin(c):
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
 
+# FDM seam only for spin renders (it makes slow rotation readable; on stills it reads as a crack)
+SEAM = any(x.startswith('spin') for x in SHOTS)
+
 def petg(hex_):
     m = bpy.data.materials.new('so-petg'); m.use_nodes = True
     nt = m.node_tree; b = nt.nodes['Principled BSDF']
@@ -44,6 +47,8 @@ def petg(hex_):
     bump = nt.nodes.new('ShaderNodeBump'); bump.inputs['Strength'].default_value = 0.12
     bump.inputs['Distance'].default_value = 0.00004
     nt.links.new(mix.outputs[0], bump.inputs['Height']); nt.links.new(bump.outputs['Normal'], b.inputs['Normal'])
+    if not SEAM:
+        return m
     # Z-seam: a faint, slightly darker vertical line at one azimuth (object space -> rotates with the part)
     tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
     at = nt.nodes.new('ShaderNodeMath'); at.operation = 'ARCTAN2'
@@ -206,6 +211,9 @@ SHOTS_DEF = {
     'thumb': lambda: (aim(9, -20, 0.30), render('thumb', 1000, 1000)),
     'spin-landscape': lambda: (spin_setup(), aim(11, -20, 0.36), render_spin('spin-landscape', 1600, 1100, spin_frames())),
     'spin-portrait': lambda: (spin_setup(), aim(11, -20, 0.40), setattr(cam_data, 'shift_y', 0.16), render_spin('spin-portrait', 900, 1400, spin_frames())),
+    # Reference shots for AI image/video prompts (see docs/PROMPT_PACK.md)
+    'side': lambda: (aim(0, 0, 0.30), render('side', 1600, 1600)),
+    'ring-detail': lambda: (underside_setup(), aim(-48, -20, 0.17, CENTER + mathutils.Vector((0, 0, -0.012))), render('ring-detail', 1600, 1200)),
     'underside': lambda: (underside_setup(), aim(-34, -20, 0.30), render('underside', 1800, 1200)),
 }
 for s in SHOTS:
