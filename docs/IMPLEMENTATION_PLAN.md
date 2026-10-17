@@ -40,7 +40,7 @@ See `docs/reviews/STAGE_2.md`.
 
 - [x] Studio renders from the 3D model: hero, configurator thumbnail, underside
 - [x] Technical drawings traced from the model; real dimensions (62 × 65 mm)
-- [ ] Spin frame sequence from the model
+- [x] Spin frame sequence from the model (36 frames, landscape + portrait)
 
 ## Stage 3 — Commerce
 
