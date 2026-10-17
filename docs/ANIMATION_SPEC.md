@@ -1,42 +1,53 @@
 # Animation spec
 
 Principle (style guide §05): **Scroll = reveal, not friction.** Pin briefly; reversible; reduced
-complexity on mobile. Implementation in Stage 2. All numbers live in `designTokens.motion`.
+complexity on mobile. Implemented in Stage 2. All numbers live in `designTokens.motion`.
 
 ## Engine
 
-- GSAP 3 + ScrollTrigger, registered once in `app/providers/`.
-- Each feature exposes `use<Feature>Motion(refs)` built with `useGSAP({ scope })` → automatic revert on unmount/HMR.
-- `gsap.matchMedia()` contexts: `(min-width: 768px) and (prefers-reduced-motion: no-preference)`, `(max-width: 767px) and (prefers-reduced-motion: no-preference)`, `(prefers-reduced-motion: reduce)`.
-- `ScrollTrigger.config({ ignoreMobileResize: true })`; refresh after hero/spin images decode. No `normalizeScroll`, no smooth-scroll library (don't hijack native scroll).
-- Animate only `transform`, `opacity`, and a capped `filter: blur()` on one layer. Images carry explicit `width`/`height` → no layout shift.
+- GSAP 3.15 + ScrollTrigger, registered once in `src/motion/gsap.ts`. Features import GSAP from there, never from `'gsap'`.
+- Each animated feature owns `use<Feature>Motion(ref)` built with `useGSAP({ scope })` → automatic revert on unmount/HMR.
+- `gsap.matchMedia()` contexts from `designTokens.motion.queries`: `small` (<768, motion OK), `large` (≥768, motion OK), `reduced`. Nothing is registered under `reduced`.
+- **Markup is the static end state.** Hidden animation layers carry `invisible opacity-0` classes; timelines set their start states with `fromTo`. No-JS and reduced-motion therefore show the final frame with no flash.
+- `ScrollTrigger.config({ ignoreMobileResize: true })`. `MotionProvider` calls `ScrollTrigger.refresh()` after `document.fonts.ready` and `window.load`. No `normalizeScroll`, no smooth-scroll library.
+- Animate `transform`/`opacity`/`clip-path`, plus a capped `filter: blur()` on one spin layer. Images carry explicit dimensions → no layout shift.
+- Shared helpers: `src/motion/presets.ts` (`fadeUpOnEnter`, `parallax`), `src/motion/useStoryBandMotion.ts`.
 
-## Sequence
+## Sequence (as built)
 
-| #   | Section             | Trigger (start → end)                                                     | Behaviour                                                                                                                                                                                                                                                                                            | Mobile (<768)                                | Reduced motion                               |
-| --- | ------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| 1   | Hero intro          | page load (not scroll)                                                    | Construction circles stroke-draw (0.9s, stagger), product fades in + settles from −4° tilt / y 12px, annotations + dimension lines draw, then copy/CTA fade up. Total ≤1.6s; CTA usable immediately (no opacity 0 on interactive elements beyond 300ms).                                             | 2 circles, no side views, annotations hidden | All static, final state                      |
-| 1b  | Hero scroll         | hero `top top` → `bottom top`, scrub                                      | Subtle push-in (scale 1 → 1.04), construction lines fade to 0.4                                                                                                                                                                                                                                      | Same, scale 1.02                             | None                                         |
-| 2   | **Spin (pinned)**   | section `top top` → `+=220%` (mobile `+=150%`), `pin: true`, `scrub: 0.6` | 0–15%: heading in. 10–55%: crossfade `spinRest` → `spinMotion` → `spinMotionFast`; motion ring SVG ellipses rotate & fade in; blur layer to `spinMaxBlur`. 30–70%: background shifts from technical grid (warm white) to real surface photo. 70–100%: hold, footnote "Smooth. Balanced. Satisfying." | Shorter pin, blur ≤2px, ring count halved    | No pin; show `spinMotion` still with heading |
-| 3   | Bottle reveal       | section `top 80%` → `center center`, scrub (not pinned)                   | `bottleUnderside` scales 1.12 → 1 inside a clip-path inset reveal; at ~60% crossfade to `bottleReveal`; callout leader line draws + label fades. Fully reversible.                                                                                                                                   | Single image column, callout under image     | Static `bottleReveal`                        |
-| 4   | Lifestyle + stand   | section enters → leaves, scrub                                            | Image `yPercent` parallax (≤ `parallax` px); heading + support fade up (toggleActions `play none none reverse`); "Explore the stand" link fades in last                                                                                                                                              | Parallax 24px                                | Static                                       |
-| 5   | Configurator        | —                                                                         | No scroll motion. CSS transitions only: selection border, swatch ring, stepper press, add-to-bag tactile press (scale 0.98).                                                                                                                                                                         | Same                                         | Transitions ≈0                               |
-| 6   | Details             | `top 75%`, once                                                           | Technical drawing strokes draw (stroke-dashoffset), labels fade                                                                                                                                                                                                                                      | Simplified drawing                           | Static                                       |
-| 7   | Manufacturing       | enter → leave, scrub                                                      | Slight horizontal pan/parallax of print-bed image; heading fades up                                                                                                                                                                                                                                  | Vertical parallax only                       | Static                                       |
-| —   | Cart drawer         | open/close                                                                | Slide from right (desktop) / bottom sheet-like from right on mobile, `duration.drawer`; backdrop fade                                                                                                                                                                                                | Full-height, safe-area padding               | Instant                                      |
-| —   | Sticky purchase bar | IntersectionObserver on hero CTA                                          | Slides up when hero CTA leaves viewport; hides when configurator is in view or drawer open                                                                                                                                                                                                           | Mobile only                                  | Instant                                      |
+| #   | Section                 | Trigger (start → end)                                                                                    | Behaviour                                                                                                                                                                                                    | <768                                                                                | Reduced motion             |
+| --- | ----------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | -------------------------- |
+| 1   | Hero intro              | page load, `heroIntro.delay` 0.1s                                                                        | Construction circles/lines scale+fade in (staggered), object settles from −4° / y 18, heading lines + support rise, purchase row at 0.25s (fully visible ≈0.85s), annotations 0.8s, views + feature row 0.6s | Same, fewer construction elements                                                   | Static                     |
+| 1b  | Hero scroll             | hero `top top` → `bottom top`, scrub                                                                     | Object scale 1 → 1.04                                                                                                                                                                                        | 1.02                                                                                | None                       |
+| 2   | **Spin (the only pin)** | start `top top` if the section fills the viewport, else `center center`; end `+=220%` of vh; `scrub 0.6` | 5–30%: technical drawing layer fades out → 40–60%: `spinRest` fades revealing `spinMotion` → 65–85%: `spinMotionFast` fades in with blur 0 → 4px → 80–90%: footnote → hold                                   | Pin `top top`, `+=100%`: single portrait frame pulls back 1.14 → 1; footnote at 60% | No pin; `spinMotion` frame |
+| 3   | Bottle reveal           | section `top 85%` → `center 45%`, scrub, not pinned                                                      | Clip `inset(10% 8%)` → 0, layers scale 1.15 → 1; underside close-up fades to bottle-in-use at 50–85%                                                                                                         | Clip + scale on the portrait frame only                                             | Static `bottleReveal`      |
+| 4   | Lifestyle + stand       | copy: `top 75%` toggle (reverses); media: `top bottom` → `bottom top` scrub                              | Copy (incl. "Explore the stand") fades up; image parallax ±60px at scale 1.1                                                                                                                                 | ±24px                                                                               | Static                     |
+| 5   | Configurator            | —                                                                                                        | CSS transitions only (selection border, swatch ring, button press 0.98)                                                                                                                                      | Same                                                                                | Transitions ≈0             |
+| 6   | Details                 | `top 75%`, once                                                                                          | Spec rows, drawing and close-ups rise in, staggered                                                                                                                                                          | Same                                                                                | Static                     |
+| 7   | Making                  | as Lifestyle                                                                                             | Copy fade-up + parallax                                                                                                                                                                                      | ±24px                                                                               | Static                     |
+| —   | Cart drawer             | dialog open/close                                                                                        | CSS `@starting-style` slide from right, backdrop fade, `duration.drawer`                                                                                                                                     | Same                                                                                | Instant                    |
+| —   | Sticky purchase bar     | IntersectionObserver on the mobile hero CTA + `#shop`                                                    | CSS translate-y slide                                                                                                                                                                                        | Mobile only                                                                         | Instant                    |
 
-## Why no in-plane rotation
+## Deviations from the original plan (and why)
 
-The images are 2D photographs of a vertically spinning top. Rotating them with CSS `rotate()` would
-tilt the object, not spin it — misrepresenting geometry. The spin is conveyed by frame crossfades,
-motion blur, and rotating SVG motion rings. A real video/frame sequence replaces this later
-(`spinMotion*` keys in the manifest).
+- **Mobile spin has no frame crossfade.** Only one portrait frame exists (UX board crop). Cropping the landscape frames to portrait would mean a ~7× upscale. Mobile instead gets a short (100%) pin with a pull-back. Restore the full crossfade when a portrait video or frame sequence lands (D-025).
+- **Desktop pin holds the band centred** (`center center`) rather than full-screen, so the low-resolution frames aren't stretched to fill 1440×900 (D-026).
+- **Motion-ring SVG overlay dropped.** The AI frames already contain baked motion rings, and an overlay would need per-aspect alignment with an object-cover image.
+- **Reveal callout leader line not added.** The opener's position in the placeholder is unreliable; add it with the real photo.
+- **Chapter index (01–07) not added.** Deferred to Stage 4 polish if wanted.
 
-## Robustness checklist
+## Verification (`npm run screenshots` → `tests/visual/motion.spec.ts`)
 
-- Reverse scroll returns to identical states (scrubbed timelines, no `once` on scrubbed parts).
-- Resize/orientation change: matchMedia contexts re-create; pin spacing recalculated.
-- Anchor navigation (`#shop`) jumps past the pin correctly (verify in Stage 2).
-- Touch: no scroll jank on iOS Safari (pin uses `pinType` auto; test `anticipatePin: 1`).
-- Pin length kept short so users can reach commerce quickly; purchase is always available via header/sticky bar.
+- The spin pin exists at every viewport; frames are captured at 0/30/55/80/100% into `screenshots/<vp>/motion/`.
+- **Reversibility:** a frame at 30% reached by scrolling back up is pixel-identical to the forward frame.
+- `#shop` anchor lands at viewport top (±4px) past the pin.
+- Reduced motion: no `.pin-spacer` in the DOM; static spin frame captured.
+- The page logs no console errors while scrolling (`screenshots.spec.ts`).
+- Unit (`useSpinMotion.test.tsx`): exactly one pinned trigger when motion is allowed, none under reduced motion, triggers killed on unmount.
+
+## Robustness notes
+
+- ScrollTriggers are created in DOM order (sibling effects run in order), so triggers after the pin include its spacing.
+- `invalidateOnRefresh` on the pin, with function-based start/end → recalculated on resize/orientation change.
+- `html { scroll-behavior: smooth }` is kept; ScrollTrigger disables it during refresh internally. If anchor jumps misbehave on a device, remove it first.
+- Not yet tested on a physical iOS device (URL-bar resize, `svh`). Stage 4.

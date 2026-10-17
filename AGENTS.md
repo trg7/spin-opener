@@ -29,38 +29,39 @@ Boards show prices, badges, colours, dimensions and claims that the brief forbid
 
 Requires Node ≥ 22.12 (`.nvmrc` → 24) and **npm ≥ 11** (npm 10.9 crashes resolving this tree; use `npx npm@11 install` if needed).
 
-| Command                | Purpose                                                                  |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `npm run dev`          | Vite dev server                                                          |
-| `npm run typecheck`    | Strict TS (`tsc -b --noEmit`)                                            |
-| `npm run lint`         | ESLint (incl. no hardcoded `/assets/` paths)                             |
-| `npm test`             | Vitest (jsdom)                                                           |
-| `npm run build`        | Production build                                                         |
-| `npm run verify`       | All of the above — run before every commit                               |
-| `npm run format:check` | Prettier                                                                 |
-| `npm run screenshots`  | Build + Playwright capture at 390/768/1440 → `screenshots/` (gitignored) |
+| Command                | Purpose                                                                                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`          | Vite dev server                                                                                                                                                       |
+| `npm run typecheck`    | Strict TS (`tsc -b --noEmit`)                                                                                                                                         |
+| `npm run lint`         | ESLint (incl. no hardcoded `/assets/` paths)                                                                                                                          |
+| `npm test`             | Vitest (jsdom)                                                                                                                                                        |
+| `npm run build`        | Production build                                                                                                                                                      |
+| `npm run verify`       | All of the above — run before every commit                                                                                                                            |
+| `npm run format:check` | Prettier                                                                                                                                                              |
+| `npm run screenshots`  | Build + Playwright: static captures **and motion checks** (pin, reversibility, anchors, reduced motion, console errors) at 390/768/1440 → `screenshots/` (gitignored) |
 
 ## 4. Folder ownership
 
-| Path                         | Owns                                                                | Don't                                              |
-| ---------------------------- | ------------------------------------------------------------------- | -------------------------------------------------- |
-| `src/app/`                   | `App.tsx` section composition, providers                            | Put section markup here                            |
-| `src/features/<section>/`    | One homepage section: TSX, its animation hook, local tests          | Import from another feature                        |
-| `src/components/layout/`     | Header, footer, sticky purchase bar, section shell                  | Contain product data                               |
-| `src/components/ui/`         | Primitives: Button, Price, QuantityStepper, Swatch, ResponsiveImage | Know about products or the cart                    |
-| `src/components/commerce/`   | Cart drawer, line items, add-to-bag wiring                          | Call anything except the store/adapter             |
-| `src/components/technical/`  | SVG construction geometry, technical drawings, annotation callouts  | Invent dimensions — read from data                 |
-| `src/content/siteCopy.ts`    | **All** user-facing copy                                            | Inline marketing strings in components             |
-| `src/config/designTokens.ts` | Colours, fonts, breakpoints, **all motion timings**                 | Duplicate values elsewhere                         |
-| `src/styles/theme.css`       | Tailwind `@theme` mirror of tokens (parity enforced by tests)       | Add colours not in `designTokens.ts`               |
-| `src/config/siteConfig.ts`   | Feature flags, locale/currency, defaults                            |                                                    |
-| `src/data/products.ts`       | Catalogue, variants, prices, colours                                | Hardcode prices anywhere else                      |
-| `src/data/assetManifest.ts`  | **The only place image paths appear** (semantic keys)               | Reference `/assets/...` in components (lint fails) |
-| `src/commerce/`              | Types, `CommerceAdapter` interface, mock adapter                    | Import React or UI                                 |
-| `src/hooks/`                 | Shared hooks (`useReducedMotion`, `useMediaQuery`)                  |                                                    |
-| `public/assets/`             | Served images, grouped by role                                      | Store originals (they live in `references/`)       |
-| `references/`                | Original design inputs. **Read-only. Never served.**                | Edit, rename, or delete                            |
-| `docs/`                      | Audit, architecture, animation spec, manifest, decisions, QA        |                                                    |
+| Path                         | Owns                                                                      | Don't                                              |
+| ---------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------- |
+| `src/app/`                   | `App.tsx` section composition, providers                                  | Put section markup here                            |
+| `src/features/<section>/`    | One homepage section: TSX, its animation hook, local tests                | Import from another feature                        |
+| `src/components/layout/`     | Header, footer, sticky purchase bar, section shell                        | Contain product data                               |
+| `src/components/ui/`         | Primitives: Button, Price, QuantityStepper, Swatch, ResponsiveImage       | Know about products or the cart                    |
+| `src/components/commerce/`   | Cart drawer, line items, add-to-bag wiring                                | Call anything except the store/adapter             |
+| `src/components/technical/`  | SVG construction geometry, technical drawings, annotation callouts        | Invent dimensions — read from data                 |
+| `src/content/siteCopy.ts`    | **All** user-facing copy                                                  | Inline marketing strings in components             |
+| `src/config/designTokens.ts` | Colours, fonts, breakpoints, **all motion timings**                       | Duplicate values elsewhere                         |
+| `src/styles/theme.css`       | Tailwind `@theme` mirror of tokens (parity enforced by tests)             | Add colours not in `designTokens.ts`               |
+| `src/config/siteConfig.ts`   | Feature flags, locale/currency, defaults                                  |                                                    |
+| `src/data/products.ts`       | Catalogue, variants, prices, colours                                      | Hardcode prices anywhere else                      |
+| `src/data/assetManifest.ts`  | **The only place image paths appear** (semantic keys)                     | Reference `/assets/...` in components (lint fails) |
+| `src/commerce/`              | Types, `CommerceAdapter` interface, mock adapter                          | Import React or UI                                 |
+| `src/motion/`                | GSAP registration, presets (`fadeUpOnEnter`, `parallax`), story-band hook | Import `gsap` directly in features                 |
+| `src/hooks/`                 | Shared hooks (`useReducedMotion`, `useMediaQuery`)                        |                                                    |
+| `public/assets/`             | Served images, grouped by role                                            | Store originals (they live in `references/`)       |
+| `references/`                | Original design inputs. **Read-only. Never served.**                      | Edit, rename, or delete                            |
+| `docs/`                      | Audit, architecture, animation spec, manifest, decisions, QA              |                                                    |
 
 Add a feature-level `AGENTS.md` only when a feature has non-obvious rules (e.g. spin-sequence pinning).
 

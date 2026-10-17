@@ -92,6 +92,8 @@ Lint forbids `'/assets/...'` literals elsewhere. Replacing an image = editing on
 
 Each animated feature owns `use<Feature>Motion.ts`, called with refs from its component, built
 with `useGSAP` + `gsap.matchMedia()`. Durations/lengths come from `designTokens.motion`.
+`src/motion/` holds GSAP registration (`gsap.ts`), presets and the shared story-band hook;
+`app/providers/MotionProvider.tsx` refreshes ScrollTrigger after fonts/load.
 See `ANIMATION_SPEC.md`.
 
 ## Testing

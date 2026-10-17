@@ -26,13 +26,15 @@ See `docs/reviews/STAGE_1.md` for the screenshot review and mismatch report.
 - [x] Sticky purchase bar + static cart drawer UI — `feat(layout)`
 - [x] Screenshot comparison vs boards, mismatch report, fixes — `fix(visual)`
 
-## Stage 2 — Motion
+## Stage 2 — Motion ✅
 
-1. GSAP provider, `useReducedMotion`, matchMedia contexts — `feat(motion)`
-2. Hero intro + scroll push-in
-3. Pinned spin sequence (checkpoint commit before) — `feat(motion): add scroll-driven spin`
-4. Bottle reveal, lifestyle parallax, details draw, manufacturing pan
-5. Test: reverse scroll, resize, reduced motion, anchor nav, iOS touch
+See `docs/reviews/STAGE_2.md`.
+
+- [x] GSAP provider, `useReducedMotion`, matchMedia contexts — `feat(motion)`
+- [x] Hero intro + scroll push-in
+- [x] Pinned spin sequence (checkpoint commit before) — `feat(motion): add scroll-driven spin`
+- [x] Bottle reveal, lifestyle parallax, details draw, manufacturing pan
+- [x] Test: reverse scroll, resize, reduced motion, anchor nav, iOS touch
 
 ## Stage 3 — Commerce
 

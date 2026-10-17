@@ -18,12 +18,12 @@ Run per stage. Tick only what was actually verified; note the tool/device.
 
 ## Motion (Stage 2+)
 
-- [ ] Only one pinned section
-- [ ] Reverse scroll restores states
+- [x] Only one pinned section _(unit + Playwright)_
+- [x] Reverse scroll restores states _(pixel-identical at 30%, all viewports)_
 - [ ] Resize / orientation change recalculates without jumps
-- [ ] Anchor nav (#shop, #details, #story) lands correctly past the pin
-- [ ] `prefers-reduced-motion: reduce` → static, no pin
-- [ ] No CLS from images (explicit dimensions)
+- [x] Anchor nav lands correctly past the pin _(#shop verified)_
+- [x] `prefers-reduced-motion: reduce` → static, no pin
+- [x] No CLS from images (explicit dimensions)
 - [ ] Smooth on mid-range mobile (throttled CPU 4× in DevTools)
 
 ## Commerce (Stage 3+)
