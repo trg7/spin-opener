@@ -29,8 +29,8 @@ export function App() {
       <main id="main">
         <HeroSection product={top} />
         <SpinSection />
-        <BottleRevealSection />
         <LifestyleStandSection />
+        <BottleRevealSection />
         <ProductConfigurator />
         <DetailsSection />
         <ManufacturingSection />

@@ -22,7 +22,6 @@ export function BottleRevealSection() {
       id="reveal"
       index={copy.index}
       heading={copy.headingLines}
-      support={copy.support}
       media={
         <div data-reveal="frame" className="absolute inset-0 overflow-hidden">
           <div data-reveal="layer" className="absolute inset-0">

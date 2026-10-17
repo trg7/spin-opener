@@ -15,6 +15,8 @@ complexity on mobile. Implemented in Stage 2. All numbers live in `designTokens.
 
 ## Sequence (as built)
 
+> Page order since D-047: Hero → Spin → **Lifestyle + stand (03)** → **Reveal (04)** → Configurator → Details → Making. Row numbers below are the original spec ids.
+
 | #   | Section                 | Trigger (start → end)                                                                                    | Behaviour                                                                                                                                                                                                    | <768                                                                                | Reduced motion             |
 | --- | ----------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | -------------------------- |
 | 1   | Hero intro              | page load, `heroIntro.delay` 0.1s                                                                        | Construction circles/lines scale+fade in (staggered), object settles from −4° / y 18, heading lines + support rise, purchase row at 0.25s (fully visible ≈0.85s), annotations 0.8s, views + feature row 0.6s | Same, fewer construction elements                                                   | Static                     |

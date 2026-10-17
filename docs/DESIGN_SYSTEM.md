@@ -54,7 +54,7 @@ on mobile (fewer circles, no side drawings panel, max two annotations).
 
 ## Section order
 
-01 Hero · 02 Spin · 03 Reveal · 04 Lifestyle + stand · 05 Choose your setup · 06 Details · 07 Making · Footer.
+01 Hero · 02 Spin · 03 Lifestyle + stand · 04 Reveal (D-047) · 05 Choose your setup · 06 Details · 07 Making · Footer.
 
 ## Copy voice
 

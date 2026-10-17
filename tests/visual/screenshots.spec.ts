@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const sections = ['top', 'story', 'reveal', 'lifestyle', 'shop', 'details', 'making']
+const sections = ['top', 'story', 'lifestyle', 'reveal', 'shop', 'details', 'making']
 
 /** Scroll the whole page so lazy images load, then return to top. */
 async function loadLazyImages(page: Page) {
@@ -31,6 +31,7 @@ test('capture page, sections and overlays', async ({ page }, info) => {
     const el = page.locator(`#${id}`)
     if ((await el.count()) === 0) continue
     await el.scrollIntoViewIfNeeded()
+    await page.waitForTimeout(1200) // let the section's copy fade-up finish
     await el.screenshot({ path: `${dir}/${String(i + 1).padStart(2, '0')}-${id}.png` })
   }
 

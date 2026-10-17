@@ -44,13 +44,14 @@ export const siteCopy = {
       "There's something about watching things spin. We can't quite explain it. We just know it's hard to stop.", // [board]
     footnote: 'Smooth. Balanced. Satisfying.', // [board]
   },
+  /** Chapter 04 — follows lifestyle (client reorder, D-047). Heading replaces the brief's "Oh, and it opens bottles." */
   reveal: {
-    index: '03',
-    headingLines: ['Oh, and', 'it opens bottles.'], // [brief]
-    support: 'When the time is right, it opens bottles.', // [board]
-  },
-  lifestyle: {
     index: '04',
+    headingLines: ['When the time', 'is right,', 'it opens bottles.'], // client 2026-10-17
+  },
+  /** Chapter 03 — before the reveal (client reorder, D-047). */
+  lifestyle: {
+    index: '03',
     headingLines: ['Looks good', 'doing nothing.'], // [brief]
     support: 'A place to land when the spinning stops.', // [brief]
     exploreStand: 'Explore the stand', // [brief]
