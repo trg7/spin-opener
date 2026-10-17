@@ -10,7 +10,7 @@ complexity on mobile. Implemented in Stage 2. All numbers live in `designTokens.
 - `gsap.matchMedia()` contexts from `designTokens.motion.queries`: `small` (<768, motion OK), `large` (≥768, motion OK), `reduced`. Nothing is registered under `reduced`.
 - **Markup is the static end state.** Hidden animation layers carry `invisible opacity-0` classes; timelines set their start states with `fromTo`. No-JS and reduced-motion therefore show the final frame with no flash.
 - `ScrollTrigger.config({ ignoreMobileResize: true })`. `MotionProvider` calls `ScrollTrigger.refresh()` after `document.fonts.ready` and `window.load`. No `normalizeScroll`, no smooth-scroll library.
-- Animate `transform`/`opacity`/`clip-path`, plus a capped `filter: blur()` on one spin layer. Images carry explicit dimensions → no layout shift.
+- Animate `transform`/`opacity`/`clip-path`; the spin is canvas frame drawing (no CSS filters). Images carry explicit dimensions → no layout shift.
 - Shared helpers: `src/motion/presets.ts` (`fadeUpOnEnter`, `parallax`), `src/motion/useStoryBandMotion.ts`.
 
 ## Sequence (as built)
@@ -30,9 +30,9 @@ complexity on mobile. Implemented in Stage 2. All numbers live in `designTokens.
 
 ## Deviations from the original plan (and why)
 
-- **Mobile spin has no frame crossfade.** Only one portrait frame exists (UX board crop). Cropping the landscape frames to portrait would mean a ~7× upscale. Mobile instead gets a short (100%) pin with a pull-back. Restore the full crossfade when a portrait video or frame sequence lands (D-025).
+- ~~Mobile spin has no frame crossfade~~ — superseded: both breakpoints now scrub a rendered sequence (D-037).
 - **Desktop pin holds the band centred** (`center center`) rather than full-screen, so the low-resolution frames aren't stretched to fill 1440×900 (D-026).
-- **Motion-ring SVG overlay dropped.** The AI frames already contain baked motion rings, and an overlay would need per-aspect alignment with an object-cover image.
+- **No stylised motion rings.** The rendered precession blur reads as spinning on its own; the storyboard's rings were an AI-image artefact.
 - **Reveal callout leader line not added.** The opener's position in the placeholder is unreliable; add it with the real photo.
 - **Chapter index (01–07) not added.** Deferred to Stage 4 polish if wanted.
 
