@@ -27,6 +27,12 @@ _Stage 0 · 2026-10-17_
 | Typeface name/licence                                                                        | "Light grotesk" only                                              | Whole site                                                             | Provisional Inter Tight Variable (see D-003)                                                                    |
 | Video / Blender renders                                                                      | Future                                                            | Spin & reveal fidelity                                                 | Still-image crossfades per brief                                                                                |
 
+## 2b. Received after Stage 2
+
+| Input              | Location                       | Establishes                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3D model (Blender) | `references/3d/spin-top.blend` | True geometry: thin tall stem, flat-edged disc, recessed underside channel, collar lip above a steel ball tip. **62 mm Ø × 65 mm** (client-confirmed). Supersedes all AI geometry and the 78 × 52 mm board dimensions (C6 resolved). Model's PETG colour is green (`#077354`-ish), not teal — open question (D-032). Collar has no material assigned (D-033). |
+
 ## 3. Also found (not supplied, not used)
 
 In `~/Downloads` there are two earlier drafts: `Spin Opener_ A Teal Technical Object.png` and an older

@@ -16,7 +16,7 @@ When sources disagree, the higher one wins. Record any resolved conflict in `doc
 
 1. **The user's latest explicit instruction** in the session.
 2. **Master brief** — `references/brief/SPIN_OPENER_Claude_Code_Master_Prompt.md` (copy, rules, commerce constraints).
-3. **Original wordmark** — `references/brand/spin-opener-logo.svg` (supplied). **Real product photographs** — authoritative for geometry and the bottle-opening mechanism (_not yet supplied_).
+3. **Original wordmark** — `references/brand/spin-opener-logo.svg`. **3D model** — `references/3d/spin-top.blend` (authoritative for geometry and dimensions: 62 mm Ø × 65 mm). **Real product photographs** (not yet supplied) — authoritative for finish, colour and the opener in use.
 4. **Style guide** — `references/brief/SPIN_OPENER_Style_Guide.pdf` (palette, type, identity, layout order).
 5. **Scroll animation storyboard** — `references/boards/scroll-animation-storyboard.png` (composition, sequence, motion).
 6. **UX concept board** — `references/boards/ux-concept-board.png` (mobile screens, configurator, cart drawer).
@@ -98,7 +98,8 @@ spin — it misrepresents geometry.
 - Pinning without explicit image dimensions → layout shift breaks ScrollTrigger. Always set `width`/`height` from the manifest and call `ScrollTrigger.refresh()` after images load.
 - Creating ScrollTriggers out of DOM order → wrong pin spacing. Create top-to-bottom or set `refreshPriority`.
 - Using `100vh` on mobile → use `svh`/`dvh`.
-- Treating AI board details (6 colours, 78 mm, A$34.99, "Most popular") as facts.
+- Treating AI board details (6 colours, 78 mm, A$34.99, "Most popular") as facts. Real size is 62 mm Ø × 65 mm (`topSpecs`).
+- Hand-editing `topGeometry.ts` or re-rendering by hand — use `scripts/render/` (see its README).
 - Visual changes rewriting commerce logic, or vice-versa. Keep diffs scoped.
 
 ## 9. Testing requirements

@@ -36,6 +36,12 @@ See `docs/reviews/STAGE_2.md`.
 - [x] Bottle reveal, lifestyle parallax, details draw, manufacturing pan
 - [x] Test: reverse scroll, resize, reduced motion, anchor nav, iOS touch
 
+## Render pass (between Stages 2 and 3)
+
+- [x] Studio renders from the 3D model: hero, configurator thumbnail, underside
+- [x] Technical drawings traced from the model; real dimensions (62 × 65 mm)
+- [ ] Spin frame sequence from the model
+
 ## Stage 3 — Commerce
 
 1. `mockCommerceAdapter` + unit tests (bundle-as-one-line, TBC, bounds) — `feat(cart)`
