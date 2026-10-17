@@ -69,6 +69,12 @@ export const siteCopy = {
     provisionalPrice: 'Prototype price',
     tbcNotice: 'Pricing for this option is still being confirmed.',
     giftNote: 'A thoughtful gift for curious people.', // [board]
+    /** Shown when the selected colour has no imagery yet (honest previews). */
+    preview: {
+      top: (shown: string, wanted: string) => `Shown in ${shown}. ${wanted} imagery coming soon.`,
+      stand: (wanted: string) =>
+        `Stand pictured is a placeholder. ${wanted} stand imagery coming soon.`,
+    },
   },
   details: {
     index: '06',

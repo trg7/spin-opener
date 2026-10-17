@@ -1,16 +1,14 @@
 import { getProductByKind } from '@/data/products'
 import { colourPickersFor, resolveVariant } from './resolveVariant'
 
-const colours = { top: 'teal', stand: 'charcoal' }
+const colours = { top: 'teal', stand: 'orange' }
 
 describe('resolveVariant', () => {
   it('resolves top, stand and bundle variants from colour selection', () => {
     expect(resolveVariant(getProductByKind('top'), colours)?.id).toBe('mock-variant-top-teal')
-    expect(resolveVariant(getProductByKind('stand'), colours)?.id).toBe(
-      'mock-variant-stand-charcoal',
-    )
+    expect(resolveVariant(getProductByKind('stand'), colours)?.id).toBe('mock-variant-stand-orange')
     expect(resolveVariant(getProductByKind('bundle'), colours)?.id).toBe(
-      'mock-variant-bundle-teal-charcoal',
+      'mock-variant-bundle-teal-orange',
     )
   })
 

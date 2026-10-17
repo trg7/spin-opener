@@ -3,23 +3,23 @@ import type { Colour, Money, Product } from '@/commerce/types'
 const aud = (amountCents: number): Money => ({ amountCents, currencyCode: 'AUD' })
 
 /**
- * Colours. Six top colours appear in the AI asset board, but none are confirmed as
- * available. Teal is the hero colour in every reference, so it is treated as the single
- * offered colour until the client confirms the range. TODO(PRODUCT_DATA)
+ * Launch colour range — the same six for the top and the stand (client, 2026-10-17).
+ * Teal's swatch is the brand teal; the other swatch hexes are provisional picks.
+ * TODO(PRODUCT_DATA): match swatches to the actual filament colours.
  */
-export const topColours: Colour[] = [
+export const colourRange: Colour[] = [
   { id: 'teal', label: 'Teal', swatch: '#008E96', status: 'confirmed' },
-  { id: 'black', label: 'Black', swatch: '#1E1F1E', status: 'unconfirmed' },
-  { id: 'sand', label: 'Sand', swatch: '#C9BBA8', status: 'unconfirmed' },
-  { id: 'coral', label: 'Coral', swatch: '#E0553F', status: 'unconfirmed' },
-  { id: 'lilac', label: 'Lilac', swatch: '#8E5BD6', status: 'unconfirmed' },
-  { id: 'sage', label: 'Sage', swatch: '#5E6B52', status: 'unconfirmed' },
+  { id: 'red', label: 'Red', swatch: '#C63A32', status: 'confirmed' },
+  { id: 'blue', label: 'Blue', swatch: '#2D5C9E', status: 'confirmed' },
+  { id: 'green', label: 'Green', swatch: '#3E7D4F', status: 'confirmed' },
+  { id: 'white', label: 'White', swatch: '#F7F6F2', status: 'confirmed' },
+  { id: 'orange', label: 'Orange', swatch: '#E57A2C', status: 'confirmed' },
 ]
 
-/** Stand appearance requires confirmation (style guide footer). TODO(PRODUCT_DATA) */
-export const standColours: Colour[] = [
-  { id: 'charcoal', label: 'Charcoal', swatch: '#2E2F2E', status: 'confirmed' },
-]
+export const topColours: Colour[] = colourRange
+export const standColours: Colour[] = colourRange
+
+const TOP_PRICE = aud(2499) // provisional A$24.99 per brief
 
 export const products: Product[] = [
   {
@@ -29,15 +29,13 @@ export const products: Product[] = [
     title: 'SPIN OPENER',
     subtitle: 'The spinning top.',
     imageKey: 'productTop',
-    variants: [
-      {
-        id: 'mock-variant-top-teal',
-        colourId: 'teal',
-        price: aud(2499), // provisional A$24.99 per brief
-        priceStatus: 'provisional',
-        availableForSale: true,
-      },
-    ],
+    variants: topColours.map((c) => ({
+      id: `mock-variant-top-${c.id}`,
+      colourId: c.id,
+      price: TOP_PRICE,
+      priceStatus: 'provisional' as const,
+      availableForSale: true,
+    })),
   },
   {
     id: 'mock-product-stand',
@@ -46,15 +44,13 @@ export const products: Product[] = [
     title: 'Display Stand',
     subtitle: 'A home for your SPIN OPENER.',
     imageKey: 'standProduct',
-    variants: [
-      {
-        id: 'mock-variant-stand-charcoal',
-        colourId: 'charcoal',
-        price: null, // TODO(PRODUCT_DATA): stand price TBC (board shows A$14.99 — unapproved)
-        priceStatus: 'tbc',
-        availableForSale: true,
-      },
-    ],
+    variants: standColours.map((c) => ({
+      id: `mock-variant-stand-${c.id}`,
+      colourId: c.id,
+      price: null, // TODO(PRODUCT_DATA): stand price TBC (board shows A$14.99 — unapproved)
+      priceStatus: 'tbc' as const,
+      availableForSale: true,
+    })),
   },
   {
     id: 'mock-product-bundle',
@@ -67,16 +63,18 @@ export const products: Product[] = [
       { productId: 'mock-product-top', quantity: 1 },
       { productId: 'mock-product-stand', quantity: 1 },
     ],
-    variants: [
-      {
-        id: 'mock-variant-bundle-teal-charcoal',
-        colourId: 'teal',
-        bundleColours: { top: 'teal', stand: 'charcoal' },
+    // Every top × stand pairing (matching or contrasting) is its own variant — maps to a
+    // Shopify product with two options (6 × 6 = 36 variants, under Shopify's limit).
+    variants: topColours.flatMap((t) =>
+      standColours.map((st) => ({
+        id: `mock-variant-bundle-${t.id}-${st.id}`,
+        colourId: t.id,
+        bundleColours: { top: t.id, stand: st.id },
         price: null, // TODO(PRODUCT_DATA): bundle price TBC (board shows A$34.99 — unapproved)
-        priceStatus: 'tbc',
+        priceStatus: 'tbc' as const,
         availableForSale: true,
-      },
-    ],
+      })),
+    ),
   },
 ]
 

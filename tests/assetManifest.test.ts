@@ -1,9 +1,9 @@
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { assets, topColourImages } from '@/data/assetManifest'
+import { assets } from '@/data/assetManifest'
 import { products } from '@/data/products'
 
-const all = [...Object.entries(assets), ...Object.entries(topColourImages)]
+const all = Object.entries(assets)
 
 describe('asset manifest', () => {
   it.each(all.filter(([, a]) => a.src !== null))('%s file exists in public/', (_key, asset) => {

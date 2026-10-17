@@ -29,11 +29,36 @@ describe('ProductConfigurator', () => {
     expect(screen.getByRole('group', { name: /^Stand/ })).toBeInTheDocument()
   })
 
-  it('offers only confirmed colours', () => {
+  it('offers the six launch colours', () => {
     render(<ProductConfigurator />)
     const colour = screen.getByRole('group', { name: /^Colour/ })
     const swatches = within(colour).getAllByRole('radio')
-    expect(swatches.map((s) => s.getAttribute('aria-label'))).toEqual(['Teal'])
+    expect(swatches.map((s) => s.getAttribute('aria-label'))).toEqual([
+      'Teal',
+      'Red',
+      'Blue',
+      'Green',
+      'White',
+      'Orange',
+    ])
+  })
+
+  it('says when the photo does not show the selected colour', async () => {
+    const user = userEvent.setup()
+    render(<ProductConfigurator />)
+    expect(screen.queryByText(/imagery coming soon/)).not.toBeInTheDocument()
+    await user.click(screen.getByRole('radio', { name: 'Red' }))
+    expect(screen.getByText('Shown in Teal. Red imagery coming soon.')).toBeInTheDocument()
+  })
+
+  it('lets the bundle mix top and stand colours', async () => {
+    const user = userEvent.setup()
+    render(<ProductConfigurator />)
+    await user.click(screen.getByRole('radio', { name: 'Top + Stand' }))
+    const stand = screen.getByRole('group', { name: /^Stand/ })
+    expect(within(stand).getAllByRole('radio')).toHaveLength(6)
+    await user.click(within(stand).getByRole('radio', { name: 'White' }))
+    expect(within(stand).getByRole('radio', { name: 'White' })).toBeChecked()
   })
 
   it('has three setup options', () => {

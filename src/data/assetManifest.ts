@@ -211,44 +211,17 @@ export const assets = {
 export type AssetKey = keyof typeof assets
 
 /**
- * Unconfirmed colour variants cropped from the board. Kept for when the range is confirmed;
- * the configurator must only show colours whose status is `confirmed` in src/data/products.ts.
+ * Per-colour product imagery. Only the teal top exists (AI placeholder); every other colour —
+ * and every stand colour (the stand image is an AI charcoal placeholder) — falls back to the
+ * default image and the configurator says so. Add entries here as colour images arrive.
  */
-export const topColourImages: Record<string, ImageAsset> = {
-  teal: assets.productTop,
-  black: ai(
-    'product/colours/black.webp',
-    140,
-    114,
-    'Black SPIN OPENER',
-    'Transparent product render ≥1000px',
-  ),
-  sand: ai(
-    'product/colours/sand.webp',
-    140,
-    110,
-    'Sand SPIN OPENER',
-    'Transparent product render ≥1000px',
-  ),
-  coral: ai(
-    'product/colours/coral.webp',
-    140,
-    110,
-    'Coral SPIN OPENER',
-    'Transparent product render ≥1000px',
-  ),
-  lilac: ai(
-    'product/colours/lilac.webp',
-    140,
-    105,
-    'Lilac SPIN OPENER',
-    'Transparent product render ≥1000px',
-  ),
-  sage: ai(
-    'product/colours/sage.webp',
-    140,
-    105,
-    'Sage SPIN OPENER',
-    'Transparent product render ≥1000px',
-  ),
+export const colourImages: {
+  top: Partial<Record<string, ImageAsset>>
+  stand: Partial<Record<string, ImageAsset>>
+} = {
+  top: { teal: assets.productTop },
+  stand: {},
 }
+
+/** The colour the default image actually shows (for the "shown in …" note). */
+export const defaultImageColour = { top: 'teal', stand: null } as const

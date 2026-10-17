@@ -41,6 +41,14 @@ describe('product catalogue', () => {
     expect(bundle?.bundleComponents?.every((c) => ids.has(c.productId))).toBe(true)
   })
 
+  it('offers every top × stand pairing as a bundle variant', () => {
+    const bundle = products.find((p) => p.kind === 'bundle')
+    const pairs = new Set(
+      bundle?.variants.map((v) => `${v.bundleColours?.top}/${v.bundleColours?.stand}`),
+    )
+    expect(pairs.size).toBe(topColours.length * standColours.length)
+  })
+
   it('formats AUD as A$', () => {
     expect(formatMoney({ amountCents: 2499, currencyCode: 'AUD' })).toBe('A$24.99')
   })

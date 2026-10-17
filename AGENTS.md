@@ -84,7 +84,7 @@ Add a feature-level `AGENTS.md` only when a feature has non-obvious rules (e.g. 
 
 - Use `TODO(PRODUCT_DATA)` for every unconfirmed fact.
 - Top price **A$24.99 is provisional**. Stand and bundle prices are **TBC** (`price: null`). A cart containing TBC lines shows no misleading subtotal and cannot proceed to a priced checkout.
-- Offer only colours with `status: 'confirmed'`. Currently: Teal top, Charcoal stand.
+- Offer only colours with `status: 'confirmed'`. Launch range (D-048): Teal, Red, Blue, Green, White, Orange for top **and** stand (`colourRange`). Never imply a photo shows a colour it doesn't — use the preview note.
 - No invented savings, "Most popular" badges, reviews, shipping promises, dimensions, materials or production claims.
 - A bundle is **one** cart line (bundle variant) — never add the top and stand lines separately.
 - Checkout is mocked: show `Prototype — checkout unavailable`. Never simulate payment.

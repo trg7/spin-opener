@@ -41,10 +41,14 @@ asset-board crops would need heavy side-cropping.
 | `spinMotionPortrait`   | `motion/spin-motion-portrait.webp`   | 304,252,520,578     | 216×326 | placeholder-ai | Portrait render/video ≥1290×2000 |
 | `bottleRevealPortrait` | `motion/bottle-in-use-portrait.webp` | 549,266,757,608     | 208×342 | placeholder-ai | Real portrait photo ≥1290×2100   |
 
-## Gated (unconfirmed colours — not offered for sale)
+## Colour imagery (`colourImages`)
 
-`topColourImages.{black,sand,coral,lilac,sage}` → `product/colours/<id>.webp`, 140×105–114, crop boxes in
-the column/row grid at x 1228/1380, y 58/198/335. Only shown if the colour is confirmed in `products.ts`.
+Launch range (D-048): Teal, Red, Blue, Green, White, Orange — top and stand. Only the **teal top**
+has an image (`productTop`, AI placeholder); the stand image is an AI charcoal placeholder in no
+launch colour. Missing colours fall back to the default image with an explicit preview note in the
+configurator. Needed: one transparent image per colour for the top (×6) and stand (×6), plus
+top-on-stand pairings for the bundle card if desired. The off-range AI crops (black, sand, coral,
+lilac, sage) were removed.
 
 ## Built in code (not images)
 

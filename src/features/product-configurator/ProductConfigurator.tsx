@@ -9,6 +9,7 @@ import { SwatchGroup } from '@/components/ui/SwatchGroup'
 import { siteConfig } from '@/config/siteConfig'
 import { siteCopy } from '@/content/siteCopy'
 import { getProductByKind, standColours, topColours } from '@/data/products'
+import { previewNote } from './previewNote'
 import { SetupOption } from './SetupOption'
 import {
   colourPickersFor,
@@ -36,6 +37,7 @@ export function ProductConfigurator() {
   const variant = resolveVariant(product, colours)
   const pickers = colourPickersFor(kind)
   const isTbc = variant?.priceStatus === 'tbc'
+  const note = previewNote(pickers, colours)
 
   return (
     <section id="shop" aria-labelledby="shop-heading" className="page-x py-20 lg:py-28">
@@ -80,6 +82,11 @@ export function ProductConfigurator() {
                 />
               ))}
             </div>
+            {note && (
+              <p aria-live="polite" className="-mt-3 text-sm text-ink-muted">
+                {note}
+              </p>
+            )}
 
             <div className="flex items-end justify-between gap-6 border-t border-grid pt-6">
               <div className="flex flex-col gap-2">
