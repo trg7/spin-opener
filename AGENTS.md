@@ -16,7 +16,7 @@ When sources disagree, the higher one wins. Record any resolved conflict in `doc
 
 1. **The user's latest explicit instruction** in the session.
 2. **Master brief** — `references/brief/SPIN_OPENER_Claude_Code_Master_Prompt.md` (copy, rules, commerce constraints).
-3. **Real product photographs** — authoritative for geometry and the bottle-opening mechanism. _Not yet supplied._
+3. **Original wordmark** — `references/brand/spin-opener-logo.svg` (supplied). **Real product photographs** — authoritative for geometry and the bottle-opening mechanism (_not yet supplied_).
 4. **Style guide** — `references/brief/SPIN_OPENER_Style_Guide.pdf` (palette, type, identity, layout order).
 5. **Scroll animation storyboard** — `references/boards/scroll-animation-storyboard.png` (composition, sequence, motion).
 6. **UX concept board** — `references/boards/ux-concept-board.png` (mobile screens, configurator, cart drawer).
@@ -67,7 +67,7 @@ Add a feature-level `AGENTS.md` only when a feature has non-obvious rules (e.g. 
 
 - Palette from the style guide only: warm white `#F3F1ED`, charcoal `#222322`, teal `#008E96`, grid `#D4D1CB`, sage `#7D806F` (+ two derived tones in `designTokens.ts`). No gradients, no new accent colours.
 - Type: light grotesk display with restrained tracking; small uppercase letter-spaced utility labels. Tokens only.
-- Use the **original wordmark asset**. Until supplied, render the labelled text placeholder; never redraw or vectorise the logo.
+- Use the **original wordmark asset** (`assets.brandWordmark`, centred lockup with rule). Never redraw, re-typeset or alter it.
 - Fine construction circles / technical grid in SVG, hairline weight, `grid` colour.
 - Generous negative space, controlled asymmetry. Avoid stock UI gradients, heavily rounded cards, emoji, loud sales copy, template styling.
 - Real HTML for all copy and commerce; images only for visual scenes. No text baked into images.

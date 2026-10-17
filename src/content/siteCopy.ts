@@ -7,8 +7,6 @@
 export const siteCopy = {
   brand: {
     name: 'SPIN OPENER',
-    /** Placeholder text lockup until the original wordmark asset is supplied. */
-    wordmarkLines: ['SPIN', 'OPENER'],
   },
   nav: {
     shop: 'Shop',

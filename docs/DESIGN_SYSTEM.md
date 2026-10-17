@@ -34,8 +34,9 @@ Photography supplies the remaining palette (terrazzo, timber, amber glass). No g
 
 ## Identity
 
-Original letter-spaced two-line wordmark `S P I N / O P E N E R`. **Asset not yet supplied**: until
-then a text placeholder renders, visibly flagged in review builds. Do not recreate with a different font.
+Original wordmark: `brand/spin-opener-wordmark.svg` — letter-spaced `S P I N` centred over `O P E N E R`,
+with a short rule beneath (aspect 2.29:1). Use the file as-is; never redraw, re-letter-space or
+re-typeset it. Minimum height 32px (mobile header 36px, desktop 44px) so the cap height stays ≥ 7px.
 
 ## Layout
 

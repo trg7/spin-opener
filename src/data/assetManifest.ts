@@ -42,12 +42,13 @@ const ai = (
 export const assets = {
   // Brand
   brandWordmark: {
-    src: null,
+    src: '/assets/brand/spin-opener-wordmark.svg',
     alt: 'SPIN OPENER',
-    width: 120,
-    height: 32,
-    status: 'missing',
-    replaceWith: 'Original wordmark as SVG (vector supplied by client — do not redraw)',
+    width: 1550,
+    height: 677,
+    status: 'final',
+    replaceWith:
+      'Original client SVG (references/brand/). Only the viewBox was tightened — never redraw.',
   },
 
   // Hero
