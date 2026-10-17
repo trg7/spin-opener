@@ -82,6 +82,14 @@ export const assets = {
     'SPIN OPENER spinning fast with motion blur',
     'Render/video frame ≥2400×1350, same camera as spinRest',
   ),
+  /** Mobile portrait crop from the UX concept board (spin screen). */
+  spinMotionPortrait: ai(
+    'motion/spin-motion-portrait.webp',
+    216,
+    326,
+    'SPIN OPENER spinning on a stone surface',
+    'Portrait render/video frame ≥1290×2000 (9:14), same scene as spinMotion',
+  ),
 
   // Bottle reveal
   bottleUnderside: ai(
@@ -97,6 +105,14 @@ export const assets = {
     240,
     'Hand using the SPIN OPENER to open a bottle',
     'Real photograph of the actual mechanism in use ≥2000px wide',
+  ),
+  /** Mobile portrait crop from the UX concept board (reveal screen). */
+  bottleRevealPortrait: ai(
+    'motion/bottle-in-use-portrait.webp',
+    208,
+    342,
+    'Hand using the SPIN OPENER to open a bottle',
+    'Real portrait photograph of the mechanism in use ≥1290×2100',
   ),
 
   // Lifestyle + stand

@@ -10,8 +10,8 @@ export function App() {
       <p className="font-utility text-label tracking-[0.14em] text-ink-muted uppercase">
         Stage 0 — foundation
       </p>
-      <h1 className="font-display text-display-xl font-light">{siteCopy.hero.heading}</h1>
-      <p className="max-w-[28ch] text-body text-ink-muted">{siteCopy.hero.support}</p>
+      <h1 className="font-display text-display-xl font-light">{siteCopy.hero.headingLines.join(' ')}</h1>
+      <p className="max-w-[28ch] text-body text-ink-muted">{siteCopy.hero.supportLines.join(' ')}</p>
     </main>
   )
 }

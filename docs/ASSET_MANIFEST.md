@@ -30,6 +30,17 @@ Status: `placeholder-ai` = provisional, may be geometrically wrong · `missing` 
 | `detailTip`             | `product/detail-tip.webp`                    | Details: tip                | 1020,530,1134,703        | 114×173           | 0.66  | placeholder-ai | Macro ≥1200px                                                                                          |
 | `manufacturingPrintBed` | `manufacturing/manufacturing-print-bed.webp` | Manufacturing               | 856,770,1150,998         | 294×228           | 1.29  | placeholder-ai | **Real** Melbourne production photo/video ≥2400px                                                      |
 
+## Mobile portrait crops (UX concept board)
+
+Cropped from `references/boards/ux-concept-board.png` phone screens, **below** the baked headings and
+above the baked captions — no text or UI included. Used for the 390px layout, where the landscape
+asset-board crops would need heavy side-cropping.
+
+| Key                    | File                                 | Crop box (UX board) | Size    | Status         | Replacement                      |
+| ---------------------- | ------------------------------------ | ------------------- | ------- | -------------- | -------------------------------- |
+| `spinMotionPortrait`   | `motion/spin-motion-portrait.webp`   | 304,252,520,578     | 216×326 | placeholder-ai | Portrait render/video ≥1290×2000 |
+| `bottleRevealPortrait` | `motion/bottle-in-use-portrait.webp` | 549,266,757,608     | 208×342 | placeholder-ai | Real portrait photo ≥1290×2100   |
+
 ## Gated (unconfirmed colours — not offered for sale)
 
 `topColourImages.{black,sand,coral,lilac,sage}` → `product/colours/<id>.webp`, 140×105–114, crop boxes in

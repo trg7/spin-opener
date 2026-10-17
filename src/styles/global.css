@@ -32,3 +32,43 @@
     scroll-behavior: auto !important;
   }
 }
+
+@layer components {
+  /* Page container: 1440 max, mobile gutter 20px (safe-area aware), 40px tablet, 64px desktop */
+  .page-x {
+    padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+  @media (min-width: 48rem) {
+    .page-x {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 80rem) {
+    .page-x {
+      padding-inline: 4rem;
+    }
+  }
+  .page-container {
+    margin-inline: auto;
+    max-width: 90rem;
+  }
+
+  /* Feathers a rectangular placeholder photo into the page (real renders will be cutouts). */
+  .feather-radial {
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  }
+
+  /* Native <dialog> drawer */
+  .drawer::backdrop {
+    background: rgb(34 35 34 / 0.38);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
