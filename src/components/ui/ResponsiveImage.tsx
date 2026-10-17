@@ -33,7 +33,7 @@ export function ResponsiveImage({
 }: Props) {
   const [failed, setFailed] = useState(false)
   const isPlaceholder =
-    asset.status !== 'final' || (mobileAsset !== undefined && mobileAsset.status !== 'final')
+    asset.status === 'placeholder-ai' || mobileAsset?.status === 'placeholder-ai'
   const showBadge = siteConfig.showPlaceholderLabels && isPlaceholder && !hideBadge
 
   if (!asset.src || failed) {

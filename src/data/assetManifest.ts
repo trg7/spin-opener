@@ -11,6 +11,8 @@ export type AssetStatus =
   | 'placeholder-ai'
   /** Needed but not supplied; render a labelled placeholder. */
   | 'missing'
+  /** Rendered from the client's 3D model — accurate geometry; colour/material pending approval. */
+  | 'render'
   /** Approved production asset. */
   | 'final'
 
@@ -23,6 +25,14 @@ export interface ImageAsset {
   /** Required size/format for the production replacement. */
   replaceWith: string
 }
+
+const render = (
+  src: string,
+  width: number,
+  height: number,
+  alt: string,
+  replaceWith: string,
+): ImageAsset => ({ src: `/assets/${src}`, width, height, alt, status: 'render', replaceWith })
 
 const ai = (
   src: string,
@@ -52,12 +62,12 @@ export const assets = {
   },
 
   // Hero
-  heroPrimary: ai(
-    'product/hero-beauty.webp',
-    304,
-    410,
-    'Teal SPIN OPENER spinning top standing on its tip',
-    'Transparent PNG/WebP render, ≥1600px tall, centred, consistent 3/4 elevation',
+  heroPrimary: render(
+    'product/hero-render.webp',
+    1600,
+    2000,
+    'Teal SPIN OPENER spinning top standing on its steel tip',
+    'Approved studio render or photo with alpha (scripts/render/rig.py shot "hero")',
   ),
 
   // Spin sequence
@@ -92,12 +102,12 @@ export const assets = {
   ),
 
   // Bottle reveal
-  bottleUnderside: ai(
-    'motion/bottle-underside.webp',
-    265,
-    161,
-    'Underside of the SPIN OPENER showing the opener mechanism',
-    'Real photograph/render of the actual mechanism ≥2000px wide',
+  bottleUnderside: render(
+    'product/underside-render.webp',
+    1800,
+    1200,
+    'Underside of the SPIN OPENER showing the steel collar and tip',
+    'Approved render or real photo of the underside (rig shot "underside")',
   ),
   bottleReveal: ai(
     'motion/bottle-in-use.webp',
@@ -139,12 +149,12 @@ export const assets = {
   ),
 
   // Products / configurator
-  productTop: ai(
-    'product/colours/teal.webp',
-    140,
-    114,
+  productTop: render(
+    'product/top-render.webp',
+    800,
+    800,
     'Teal SPIN OPENER',
-    'Transparent product render ≥1000px, per colour',
+    'Approved render per confirmed colour (rig shot "thumb")',
   ),
   standProduct: ai(
     'product/stand-side.webp',

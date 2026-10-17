@@ -32,3 +32,6 @@ renders/raw/
 *.blend1
 *.mov
 *.psd
+
+# client 3D source model is versioned (small, source of truth)
+!references/3d/*.blend

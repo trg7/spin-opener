@@ -53,10 +53,6 @@
     max-width: 90rem;
   }
 
-  /* Feathers a rectangular placeholder photo into the page (real renders will be cutouts). */
-  .feather-radial {
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
-  }
 
   /* Native <dialog> drawer */
   .drawer {

@@ -21,7 +21,9 @@ test('capture page, sections and overlays', async ({ page }, info) => {
   page.on('pageerror', (e) => errors.push(e.message))
   await page.goto('/')
   await page.evaluate(() => document.fonts.ready)
+  await page.waitForTimeout(2000) // let the hero intro finish (first view = what a visitor sees)
   await loadLazyImages(page)
+  await page.waitForTimeout(600) // sticky bar / scrub settle after returning to top
 
   await page.screenshot({ path: `${dir}/00-first-view.png` })
   await page.screenshot({ path: `${dir}/full-page.png`, fullPage: true })

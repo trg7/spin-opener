@@ -4,6 +4,7 @@ import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
+import { topSpecs } from '@/data/products'
 import { useDetailsMotion } from './useDetailsMotion'
 
 const copy = siteCopy.details
@@ -32,6 +33,12 @@ export function DetailsSection() {
             </h2>
           </div>
           <dl className="divide-y divide-grid border-y border-grid">
+            <div data-details className="grid grid-cols-[7.5rem_1fr] gap-4 py-4 text-sm">
+              <dt className="font-utility text-label font-medium uppercase text-ink-muted">
+                {copy.dimensionsTerm}
+              </dt>
+              <dd>{copy.dimensions(topSpecs.diameterMm, topSpecs.heightMm)}</dd>
+            </div>
             {copy.specs.map((s) => (
               <div
                 key={s.term}
@@ -51,8 +58,8 @@ export function DetailsSection() {
           <div className="grid grid-cols-[1fr_auto] items-center gap-6 text-ink-muted md:gap-12">
             <SideView
               className="w-full max-w-[24rem]"
-              widthLabel={copy.dimensionTbc}
-              heightLabel={copy.dimensionTbc}
+              widthLabel={copy.mm(topSpecs.diameterMm)}
+              heightLabel={copy.mm(topSpecs.heightMm)}
             />
             <TopView className="w-24 md:w-40" />
           </div>
