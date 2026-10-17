@@ -1,4 +1,4 @@
-import { test, type Page } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 
 const sections = ['top', 'story', 'reveal', 'lifestyle', 'shop', 'details', 'making']
 
@@ -16,6 +16,9 @@ async function loadLazyImages(page: Page) {
 
 test('capture page, sections and overlays', async ({ page }, info) => {
   const dir = `screenshots/${info.project.name}`
+  const errors: string[] = []
+  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+  page.on('pageerror', (e) => errors.push(e.message))
   await page.goto('/')
   await page.evaluate(() => document.fonts.ready)
   await loadLazyImages(page)
@@ -48,4 +51,6 @@ test('capture page, sections and overlays', async ({ page }, info) => {
     await page.waitForTimeout(200)
     await page.screenshot({ path: `${dir}/12-menu.png` })
   }
+
+  expect(errors, 'no console errors while scrolling the page').toEqual([])
 })
