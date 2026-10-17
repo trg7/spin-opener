@@ -16,7 +16,7 @@ export function HeroAnnotations({
   dimensionLabel: string
 }) {
   return (
-    <div className="pointer-events-none absolute inset-0 hidden lg:block">
+    <div data-hero="annotations" className="pointer-events-none absolute inset-0 hidden lg:block">
       <svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
