@@ -1,5 +1,8 @@
 # Render tooling
 
+> **Not wired into the site on `main`** (D-046). The renders were reverted at the client's request;
+> the integrated version lives on branch `experiment/blender-story`. Output paths below refer to that work.
+
 Product imagery rendered from the client's 3D model (`references/3d/spin-top.blend`, 1 unit = 1 mm).
 Requires Blender 5.x. Scripts are run headless with **auto-run disabled**; the `.blend` is never saved back.
 

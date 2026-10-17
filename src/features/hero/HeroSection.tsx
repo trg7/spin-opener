@@ -9,7 +9,6 @@ import { Price } from '@/components/ui/Price'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
-import { topSpecs } from '@/data/products'
 import { HeroAnnotations } from './HeroAnnotations'
 import { useHeroMotion } from './useHeroMotion'
 
@@ -72,13 +71,12 @@ export function HeroSection({ product }: { product: Product }) {
               className="absolute left-1/2 top-1/2 w-[118%] max-w-none -translate-x-1/2 -translate-y-1/2 lg:hidden"
             />
             <ConstructionGeometry className="absolute inset-0 hidden size-full lg:block" />
-            <div data-hero="product" className="absolute left-[11%] top-[-2%] w-[78%]">
-              <ResponsiveImage asset={assets.heroPrimary} priority />
+            <div data-hero="product" className="absolute left-[15%] top-[3%] w-[70%]">
+              <ResponsiveImage asset={assets.heroPrimary} priority imgClassName="feather-radial" />
             </div>
             <HeroAnnotations
               labels={copy.annotations}
-              widthLabel={siteCopy.details.mm(topSpecs.diameterMm)}
-              heightLabel={siteCopy.details.mm(topSpecs.heightMm)}
+              dimensionLabel={siteCopy.details.dimensionTbc}
             />
           </div>
         </div>

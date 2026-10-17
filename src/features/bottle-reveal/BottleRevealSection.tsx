@@ -9,8 +9,8 @@ const copy = siteCopy.reveal
 
 /**
  * 03 Reveal — static end state is the bottle being opened. With motion, the frame opens from
- * an inset and (≥768) crossfades from the underside close-up. The underside is rendered
- * from the 3D model; the in-use photo is still AI and should be replaced with a real one.
+ * an inset and (≥768) crossfades from the underside close-up. Imagery is AI-invented:
+ * replace with the real mechanism.
  */
 export function BottleRevealSection() {
   const ref = useRef<HTMLElement>(null)
@@ -35,12 +35,12 @@ export function BottleRevealSection() {
           </div>
           <div
             data-reveal="underside"
-            className="invisible absolute inset-0 bg-warm-white opacity-0 max-md:hidden"
+            className="invisible absolute inset-0 opacity-0 max-md:hidden"
           >
             <ResponsiveImage
               asset={assets.bottleUnderside}
               className="absolute inset-0"
-              imgClassName="object-contain p-[6%]"
+              imgClassName="object-cover"
               hideBadge
             />
           </div>

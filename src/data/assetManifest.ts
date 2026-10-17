@@ -11,8 +11,6 @@ export type AssetStatus =
   | 'placeholder-ai'
   /** Needed but not supplied; render a labelled placeholder. */
   | 'missing'
-  /** Rendered from the client's 3D model — accurate geometry; colour/material pending approval. */
-  | 'render'
   /** Approved production asset. */
   | 'final'
 
@@ -25,14 +23,6 @@ export interface ImageAsset {
   /** Required size/format for the production replacement. */
   replaceWith: string
 }
-
-const render = (
-  src: string,
-  width: number,
-  height: number,
-  alt: string,
-  replaceWith: string,
-): ImageAsset => ({ src: `/assets/${src}`, width, height, alt, status: 'render', replaceWith })
 
 const ai = (
   src: string,
@@ -62,21 +52,52 @@ export const assets = {
   },
 
   // Hero
-  heroPrimary: render(
-    'product/hero-render.webp',
-    1600,
-    2000,
-    'Teal SPIN OPENER spinning top standing on its steel tip',
-    'Approved studio render or photo with alpha (scripts/render/rig.py shot "hero")',
+  heroPrimary: ai(
+    'product/hero-beauty.webp',
+    304,
+    410,
+    'Teal SPIN OPENER spinning top standing on its tip',
+    'Transparent PNG/WebP render, ≥1600px tall, centred, consistent 3/4 elevation',
+  ),
+
+  // Spin sequence
+  spinRest: ai(
+    'motion/spin-rest.webp',
+    237,
+    126,
+    'SPIN OPENER at rest on a stone surface',
+    'Render/video frame ≥2400×1350',
+  ),
+  spinMotion: ai(
+    'motion/spin-motion-01.webp',
+    237,
+    126,
+    'SPIN OPENER spinning with light motion blur',
+    'Render/video frame ≥2400×1350, same camera as spinRest',
+  ),
+  spinMotionFast: ai(
+    'motion/spin-motion-02.webp',
+    237,
+    130,
+    'SPIN OPENER spinning fast with motion blur',
+    'Render/video frame ≥2400×1350, same camera as spinRest',
+  ),
+  /** Mobile portrait crop from the UX concept board (spin screen). */
+  spinMotionPortrait: ai(
+    'motion/spin-motion-portrait.webp',
+    216,
+    326,
+    'SPIN OPENER spinning on a stone surface',
+    'Portrait render/video frame ≥1290×2000 (9:14), same scene as spinMotion',
   ),
 
   // Bottle reveal
-  bottleUnderside: render(
-    'product/underside-render.webp',
-    1800,
-    1200,
-    'Underside of the SPIN OPENER showing the steel collar and tip',
-    'Approved render or real photo of the underside (rig shot "underside")',
+  bottleUnderside: ai(
+    'motion/bottle-underside.webp',
+    265,
+    161,
+    'Underside of the SPIN OPENER showing the opener mechanism',
+    'Real photograph/render of the actual mechanism ≥2000px wide',
   ),
   bottleReveal: ai(
     'motion/bottle-in-use.webp',
@@ -118,12 +139,12 @@ export const assets = {
   ),
 
   // Products / configurator
-  productTop: render(
-    'product/top-render.webp',
-    800,
-    800,
+  productTop: ai(
+    'product/colours/teal.webp',
+    140,
+    114,
     'Teal SPIN OPENER',
-    'Approved render per confirmed colour (rig shot "thumb")',
+    'Transparent product render ≥1000px, per colour',
   ),
   standProduct: ai(
     'product/stand-side.webp',
@@ -188,65 +209,6 @@ export const assets = {
 } satisfies Record<string, ImageAsset>
 
 export type AssetKey = keyof typeof assets
-
-/** A scroll-scrubbed frame sequence (rendered from the 3D model). */
-export interface ImageSequence {
-  frames: readonly string[]
-  width: number
-  height: number
-  alt: string
-  status: AssetStatus
-  replaceWith: string
-}
-
-const sequence = (
-  dir: string,
-  count: number,
-  width: number,
-  height: number,
-  alt: string,
-  replaceWith: string,
-): ImageSequence => ({
-  frames: Array.from(
-    { length: count },
-    (_, i) => `/assets/${dir}/${String(i + 1).padStart(3, '0')}.webp`,
-  ),
-  width,
-  height,
-  alt,
-  status: 'render',
-  replaceWith,
-})
-
-/** Spin-up sequences: frame 1 = at rest, last = full spin with precession blur. */
-export const sequences = {
-  spin: sequence(
-    'motion/spin',
-    36,
-    1200,
-    825,
-    'SPIN OPENER spinning on its tip',
-    'Re-render with scripts/render/rig.py spin-landscape (or a 2–3 s video split to frames)',
-  ),
-  spinPortrait: sequence(
-    'motion/spin-portrait',
-    36,
-    720,
-    1120,
-    'SPIN OPENER spinning on its tip',
-    'Re-render with scripts/render/rig.py spin-portrait',
-  ),
-} satisfies Record<string, ImageSequence>
-
-/** Static stand-in for a sequence (its last frame) — used for no-JS and reduced motion. */
-export const sequencePoster = (seq: ImageSequence): ImageAsset => ({
-  src: seq.frames[seq.frames.length - 1] ?? null,
-  width: seq.width,
-  height: seq.height,
-  alt: seq.alt,
-  status: seq.status,
-  replaceWith: seq.replaceWith,
-})
 
 /**
  * Unconfirmed colour variants cropped from the board. Kept for when the range is confirmed;

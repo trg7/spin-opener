@@ -1,12 +1,12 @@
 import {
   bottomViewRadii,
+  ringPath,
+  SIDE_VIEWBOX,
   sideExtents,
   sideProfilePath,
-  SIDE_VIEWBOX,
   topViewRadii,
 } from './topGeometry'
 
-/** All drawings use millimetre user units (see topGeometry.ts). */
 const stroke = {
   fill: 'none',
   stroke: 'currentColor',
@@ -14,12 +14,7 @@ const stroke = {
   vectorEffect: 'non-scaling-stroke',
 } as const
 
-const labelClass = 'fill-current font-utility uppercase tracking-[0.14em]'
-
-/**
- * Side elevation traced from the 3D model, with optional dimension lines.
- * Labels are passed in from product data — never invented here.
- */
+/** Side elevation with centre line and optional dimension lines (labels are passed in — never invented). */
 export function SideView({
   className = '',
   widthLabel,
@@ -29,30 +24,28 @@ export function SideView({
   widthLabel?: string
   heightLabel?: string
 }) {
-  const { radius: r, height: h } = sideExtents
+  const { left, right, top, bottom } = sideExtents
   const dims = widthLabel !== undefined || heightLabel !== undefined
-  const tick = 1.5
-  const dimY = h + 6 // width dimension line below the tip
-  const dimX = r + 6 // height dimension line right of the disc
   return (
     <svg
-      viewBox={dims ? `${-r - 2} -2 ${2 * r + 24} ${h + 16}` : SIDE_VIEWBOX}
+      viewBox={dims ? '0 -4 232 170' : SIDE_VIEWBOX}
       className={className}
       aria-hidden="true"
       focusable="false"
     >
-      <line x1="0" y1="-1" x2="0" y2={h + 1} {...stroke} strokeDasharray="3 2" opacity={0.45} />
+      <line x1="100" y1="0" x2="100" y2="140" {...stroke} strokeDasharray="4 3" opacity={0.5} />
       <path d={sideProfilePath} {...stroke} />
+      <path d={ringPath} {...stroke} opacity={0.6} />
       {widthLabel !== undefined && (
         <g>
-          <line x1={-r} y1={dimY} x2={r} y2={dimY} {...stroke} />
-          <line x1={-r} y1={dimY - tick} x2={-r} y2={dimY + tick} {...stroke} />
-          <line x1={r} y1={dimY - tick} x2={r} y2={dimY + tick} {...stroke} />
+          <line x1={left} y1="150" x2={right} y2="150" {...stroke} />
+          <line x1={left} y1="145" x2={left} y2="155" {...stroke} />
+          <line x1={right} y1="145" x2={right} y2="155" {...stroke} />
           <text
-            x="0"
-            y={dimY + 6}
+            x="100"
+            y="165"
             textAnchor="middle"
-            className={`${labelClass} text-[3.4px] lg:text-[2.6px]`}
+            className="fill-current font-utility text-[9px] lg:text-[7px] uppercase tracking-[0.14em]"
           >
             {widthLabel}
           </text>
@@ -60,13 +53,13 @@ export function SideView({
       )}
       {heightLabel !== undefined && (
         <g>
-          <line x1={dimX} y1="0" x2={dimX} y2={h} {...stroke} />
-          <line x1={dimX - tick} y1="0" x2={dimX + tick} y2="0" {...stroke} />
-          <line x1={dimX - tick} y1={h} x2={dimX + tick} y2={h} {...stroke} />
+          <line x1="200" y1={top} x2="200" y2={bottom} {...stroke} />
+          <line x1="195" y1={top} x2="205" y2={top} {...stroke} />
+          <line x1="195" y1={bottom} x2="205" y2={bottom} {...stroke} />
           <text
-            x={dimX + 2.5}
-            y={h / 2 + 1}
-            className={`${labelClass} text-[3.4px] lg:text-[2.6px]`}
+            x="208"
+            y="73"
+            className="fill-current font-utility text-[9px] lg:text-[7px] uppercase tracking-[0.14em]"
           >
             {heightLabel}
           </text>
@@ -85,21 +78,15 @@ function RingsView({
   crosshair?: boolean
   className?: string
 }) {
-  const R = Math.max(...radii) + 1
   return (
-    <svg
-      viewBox={`${-R} ${-R} ${2 * R} ${2 * R}`}
-      className={className}
-      aria-hidden="true"
-      focusable="false"
-    >
+    <svg viewBox="0 0 100 100" className={className} aria-hidden="true" focusable="false">
       {radii.map((r) => (
-        <circle key={r} cx="0" cy="0" r={r} {...stroke} />
+        <circle key={r} cx="50" cy="50" r={r} {...stroke} />
       ))}
       {crosshair && (
         <>
-          <line x1={-R} y1="0" x2={R} y2="0" {...stroke} opacity={0.4} />
-          <line x1="0" y1={-R} x2="0" y2={R} {...stroke} opacity={0.4} />
+          <line x1="0" y1="50" x2="100" y2="50" {...stroke} opacity={0.4} />
+          <line x1="50" y1="0" x2="50" y2="100" {...stroke} opacity={0.4} />
         </>
       )}
     </svg>

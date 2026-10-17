@@ -21,8 +21,8 @@ describe('ResponsiveImage', () => {
     expect(screen.getByText('Prototype image')).toBeInTheDocument()
   })
 
-  it.each(['final', 'render'] as const)('omits the badge for %s assets', (status) => {
-    render(<ResponsiveImage asset={{ ...asset, status }} />)
+  it('omits the badge for final assets', () => {
+    render(<ResponsiveImage asset={{ ...asset, status: 'final' }} />)
     expect(screen.queryByText('Prototype image')).not.toBeInTheDocument()
   })
 

@@ -1,14 +1,5 @@
 import type { Colour, Money, Product } from '@/commerce/types'
 
-/**
- * Physical spec of the top. Diameter/height confirmed by the client (2026-10-17) and matching
- * the 3D model (62.9 × 65.7 mm). Materials, weight and finish are still unconfirmed.
- */
-export const topSpecs = {
-  diameterMm: 62,
-  heightMm: 65,
-} as const
-
 const aud = (amountCents: number): Money => ({ amountCents, currencyCode: 'AUD' })
 
 /**

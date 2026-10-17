@@ -72,14 +72,11 @@ export const siteCopy = {
   details: {
     index: '06',
     heading: 'Details', // TODO(PRODUCT_DATA): no approved heading supplied
-    drawingNote: 'Drawn from the 3D model.',
-    dimensionsTerm: 'Dimensions',
-    dimensions: (diameterMm: number, heightMm: number) =>
-      `${diameterMm} mm diameter × ${heightMm} mm tall`,
-    mm: (value: number) => `${value} mm`,
+    drawingNote: 'Provisional drawing — final geometry to be confirmed.',
+    dimensionTbc: 'TBC',
     specs: [
-      { term: 'Opener', value: 'Zinc-plated steel ring' }, // client-confirmed 2026-10-17
-      { term: 'Materials', value: 'To be confirmed' }, // TODO(PRODUCT_DATA): body material
+      { term: 'Dimensions', value: 'To be confirmed' }, // TODO(PRODUCT_DATA)
+      { term: 'Materials', value: 'To be confirmed' }, // TODO(PRODUCT_DATA)
       { term: 'Care', value: 'To be confirmed' }, // TODO(PRODUCT_DATA)
       { term: 'Made', value: 'Designed and 3D printed in Melbourne' }, // [brief]
     ],

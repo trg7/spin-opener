@@ -36,7 +36,7 @@ See `docs/reviews/STAGE_2.md`.
 - [x] Bottle reveal, lifestyle parallax, details draw, manufacturing pan
 - [x] Test: reverse scroll, resize, reduced motion, anchor nav, iOS touch
 
-## Render pass (between Stages 2 and 3)
+## Render pass (between Stages 2 and 3) — reverted on main (D-046), kept on `experiment/blender-story`
 
 - [x] Studio renders from the 3D model: hero, configurator thumbnail, underside
 - [x] Technical drawings traced from the model; real dimensions (62 × 65 mm)
