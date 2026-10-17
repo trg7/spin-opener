@@ -53,9 +53,22 @@ export const motion = {
     reveal: 0.9,
   },
   /** Scroll distance of the single pinned sequence, as a % of viewport height. */
-  spinPinLength: { mobile: 150, desktop: 220 },
+  spinPinLength: { mobile: 100, desktop: 220 },
   /** Max blur (px) on the motion-blur layer; kept small for mobile GPU cost. */
   spinMaxBlur: { mobile: 2, desktop: 4 },
+  /** Scrub smoothing (seconds of catch-up) for scroll-linked timelines. */
+  scrub: 0.6,
   /** Max parallax travel (px) for lifestyle/manufacturing imagery. */
   parallax: { mobile: 24, desktop: 60 },
+  /** Hero intro on load. CTA must be usable almost immediately. */
+  heroIntro: { delay: 0.1, stagger: 0.08, ctaAt: 0.25 },
+  /** Hero scroll push-in (scale at the end of the hero). */
+  heroPushIn: { mobile: 1.02, desktop: 1.04 },
+  /** gsap.matchMedia() conditions. "small" = below the 768px tablet breakpoint. */
+  queries: {
+    small: '(max-width: 767px) and (prefers-reduced-motion: no-preference)',
+    large: '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
+    desktop: '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
+    reduced: '(prefers-reduced-motion: reduce)',
+  },
 } as const

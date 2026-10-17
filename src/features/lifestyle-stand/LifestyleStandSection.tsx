@@ -1,15 +1,20 @@
+import { useRef } from 'react'
 import { StoryBand } from '@/components/layout/StoryBand'
 import { ArrowRightIcon } from '@/components/ui/icons'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
+import { useStoryBandMotion } from '@/motion/useStoryBandMotion'
 
 const copy = siteCopy.lifestyle
 
 /** 04 Lifestyle + stand — the stand is introduced here, with a quiet link to the configurator. */
 export function LifestyleStandSection() {
+  const ref = useRef<HTMLElement>(null)
+  useStoryBandMotion(ref)
   return (
     <StoryBand
+      ref={ref}
       id="lifestyle"
       index={copy.index}
       heading={copy.headingLines}

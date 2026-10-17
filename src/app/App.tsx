@@ -1,3 +1,4 @@
+import { MotionProvider } from '@/app/providers/MotionProvider'
 import { CartDrawer } from '@/components/commerce/CartDrawer'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { SiteHeader } from '@/components/layout/SiteHeader'
@@ -17,7 +18,7 @@ const top = getProductByKind('top')
 /** Composition only — section order follows the style guide (§04) and brief. */
 export function App() {
   return (
-    <>
+    <MotionProvider>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-warm-white focus:px-4 focus:py-2"
@@ -37,6 +38,6 @@ export function App() {
       <SiteFooter />
       <StickyPurchaseBar product={top} />
       <CartDrawer />
-    </>
+    </MotionProvider>
   )
 }

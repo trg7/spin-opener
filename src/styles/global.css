@@ -59,8 +59,35 @@
   }
 
   /* Native <dialog> drawer */
+  .drawer {
+    transform: translateX(100%);
+    transition:
+      transform 0.42s var(--ease-out-soft),
+      overlay 0.42s allow-discrete,
+      display 0.42s allow-discrete;
+  }
+  .drawer[open] {
+    transform: translateX(0);
+  }
+  @starting-style {
+    .drawer[open] {
+      transform: translateX(100%);
+    }
+  }
   .drawer::backdrop {
+    background: rgb(34 35 34 / 0);
+    transition:
+      background-color 0.42s,
+      overlay 0.42s allow-discrete,
+      display 0.42s allow-discrete;
+  }
+  .drawer[open]::backdrop {
     background: rgb(34 35 34 / 0.38);
+  }
+  @starting-style {
+    .drawer[open]::backdrop {
+      background: rgb(34 35 34 / 0);
+    }
   }
 }
 
