@@ -1,17 +1,42 @@
+import { CartDrawer } from '@/components/commerce/CartDrawer'
+import { SiteFooter } from '@/components/layout/SiteFooter'
+import { SiteHeader } from '@/components/layout/SiteHeader'
+import { StickyPurchaseBar } from '@/components/layout/StickyPurchaseBar'
 import { siteCopy } from '@/content/siteCopy'
+import { getProductByKind } from '@/data/products'
+import { BottleRevealSection } from '@/features/bottle-reveal/BottleRevealSection'
+import { DetailsSection } from '@/features/details/DetailsSection'
+import { HeroSection } from '@/features/hero/HeroSection'
+import { LifestyleStandSection } from '@/features/lifestyle-stand/LifestyleStandSection'
+import { ManufacturingSection } from '@/features/manufacturing/ManufacturingSection'
+import { ProductConfigurator } from '@/features/product-configurator/ProductConfigurator'
+import { SpinSection } from '@/features/spin-sequence/SpinSection'
 
-/**
- * Stage 0 shell — proves the toolchain, tokens and font load. Replaced in Stage 1 by the
- * section composition described in docs/ARCHITECTURE.md.
- */
+const top = getProductByKind('top')
+
+/** Composition only — section order follows the style guide (§04) and brief. */
 export function App() {
   return (
-    <main className="mx-auto flex min-h-svh max-w-[90rem] flex-col justify-center gap-6 px-6">
-      <p className="font-utility text-label tracking-[0.14em] text-ink-muted uppercase">
-        Stage 0 — foundation
-      </p>
-      <h1 className="font-display text-display-xl font-light">{siteCopy.hero.headingLines.join(' ')}</h1>
-      <p className="max-w-[28ch] text-body text-ink-muted">{siteCopy.hero.supportLines.join(' ')}</p>
-    </main>
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-warm-white focus:px-4 focus:py-2"
+      >
+        {siteCopy.meta.skipToContent}
+      </a>
+      <SiteHeader />
+      <main id="main">
+        <HeroSection product={top} />
+        <SpinSection />
+        <BottleRevealSection />
+        <LifestyleStandSection />
+        <ProductConfigurator />
+        <DetailsSection />
+        <ManufacturingSection />
+      </main>
+      <SiteFooter />
+      <StickyPurchaseBar product={top} />
+      <CartDrawer />
+    </>
   )
 }
