@@ -75,6 +75,7 @@ with width/height, lazy loading, error fallback, optional "Prototype image" badg
 - `commerce/commerceAdapter.ts` — the interface. UI depends on this only.
 - `commerce/mockCommerceAdapter.ts` _(Stage 3)_ — in-memory implementation; computes line totals;
   subtotal `null` when any line is TBC; `beginCheckout()` → `{ status: 'unavailable' }`.
+- `store/uiStore.ts` _(Stage 1)_ — drawer open state only.
 - `store/cartStore.ts` _(Stage 3)_ — Zustand store: cart snapshot, `isDrawerOpen`, async actions
   delegating to the adapter. Swap adapters in `app/providers/`.
 - Bundles are a single variant/line. Quantity bounds 1–10 (TBC with client).

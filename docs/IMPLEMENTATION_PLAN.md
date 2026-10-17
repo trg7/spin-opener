@@ -12,17 +12,19 @@ Stop for user review after each stage. Commits listed are the intended focused m
 - [x] Data tests (token parity, contrast, catalogue rules, manifest files)
 - [x] `AGENTS.md` + docs; baseline commit
 
-## Stage 1 — Static fidelity (priority order)
+## Stage 1 — Static fidelity ✅
 
-1. Playwright + screenshot script (390/768/1440) — `chore(tooling)`
-2. UI primitives: Button, Eyebrow, Price, ResponsiveImage (fallback + badge), icons, QuantityStepper, Swatch — `feat(ui)`
-3. Technical SVGs: ConstructionGeometry, TechnicalViews, AnnotationCallout — `feat(technical)`
-4. Header (wordmark placeholder, nav, bag), footer, section shell — `feat(layout)`
-5. Hero (mobile first) — `feat(hero)`
-6. Spin, Reveal, Lifestyle + stand (static end states) — `feat(story)`
-7. Configurator (static, interactive selection UI) + Details + Manufacturing — `feat(configurator)`, `feat(details)`
-8. Sticky purchase bar + static cart drawer UI — `feat(layout)`
-9. Screenshot comparison vs boards, mismatch report, fixes — `fix(visual)`
+See `docs/reviews/STAGE_1.md` for the screenshot review and mismatch report.
+
+- [x] Playwright + screenshot script (390/768/1440) — `chore(tooling)`
+- [x] UI primitives: Button, Eyebrow, Price, ResponsiveImage (fallback + badge), icons, QuantityStepper, Swatch — `feat(ui)`
+- [x] Technical SVGs: ConstructionGeometry, TechnicalViews, AnnotationCallout — `feat(technical)`
+- [x] Header (wordmark placeholder, nav, bag), footer, section shell — `feat(layout)`
+- [x] Hero (mobile first) — `feat(hero)`
+- [x] Spin, Reveal, Lifestyle + stand (static end states) — `feat(story)`
+- [x] Configurator (static, interactive selection UI) + Details + Manufacturing — `feat(configurator)`, `feat(details)`
+- [x] Sticky purchase bar + static cart drawer UI — `feat(layout)`
+- [x] Screenshot comparison vs boards, mismatch report, fixes — `fix(visual)`
 
 ## Stage 2 — Motion
 

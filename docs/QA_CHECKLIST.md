@@ -10,10 +10,10 @@ Run per stage. Tick only what was actually verified; note the tool/device.
 
 ## Visual (Stage 1+)
 
-- [ ] Screenshots at 390, 768, 1440 captured and compared to boards
-- [ ] Hero shows product, proposition, price and Add to Bag above the fold at 390×844
+- [x] Screenshots at 390, 768, 1440 captured and compared to boards _(Stage 1, Playwright Chromium)_
+- [x] Hero shows product, proposition, price and Add to Bag above the fold at 390×844
 - [ ] Palette/type tokens only; no gradients, heavy radii, shadows
-- [ ] Placeholder imagery and wordmark visibly flagged
+- [x] Placeholder imagery visibly flagged (wordmark is now final)
 - [ ] No horizontal scroll at any width (320–1920)
 
 ## Motion (Stage 2+)
@@ -34,7 +34,7 @@ Run per stage. Tick only what was actually verified; note the tool/device.
 - [ ] TBC lines → no misleading subtotal; checkout blocked
 - [ ] Checkout shows "Prototype — checkout unavailable"
 - [ ] Drawer: focus trap, Esc closes, focus returns, scroll lock without layout jump, safe-area padding
-- [ ] Sticky bar never covers content or the home indicator
+- [ ] Sticky bar never covers content or the home indicator _(spin footnote lifted clear; verify on device)_
 
 ## Accessibility
 
@@ -43,7 +43,7 @@ Run per stage. Tick only what was actually verified; note the tool/device.
 - [ ] Touch targets ≥ 44px
 - [ ] Contrast AA (tested for text tokens)
 - [ ] Alt text from manifest; decorative SVG `aria-hidden`
-- [ ] Configurator options use radio-group semantics
+- [x] Configurator options use radio-group semantics (native radios, explicit names + descriptions)
 
 ## Performance
 
