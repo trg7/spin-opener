@@ -78,7 +78,8 @@ export const siteCopy = {
       `${diameterMm} mm diameter × ${heightMm} mm tall`,
     mm: (value: number) => `${value} mm`,
     specs: [
-      { term: 'Materials', value: 'To be confirmed' }, // TODO(PRODUCT_DATA)
+      { term: 'Opener', value: 'Zinc-plated steel ring' }, // client-confirmed 2026-10-17
+      { term: 'Materials', value: 'To be confirmed' }, // TODO(PRODUCT_DATA): body material
       { term: 'Care', value: 'To be confirmed' }, // TODO(PRODUCT_DATA)
       { term: 'Made', value: 'Designed and 3D printed in Melbourne' }, // [brief]
     ],

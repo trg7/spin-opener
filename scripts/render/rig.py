@@ -66,9 +66,18 @@ def steel():
     b.inputs['Roughness'].default_value = 0.34
     return m
 
+def zinc():
+    # Bright zinc plating: cooler and slightly more diffuse than stainless.
+    m = bpy.data.materials.new('so-zinc'); m.use_nodes = True
+    b = m.node_tree.nodes['Principled BSDF']
+    b.inputs['Base Color'].default_value = (0.50, 0.53, 0.56, 1)
+    b.inputs['Metallic'].default_value = 1.0
+    b.inputs['Roughness'].default_value = 0.30
+    return m
+
 TEAL = '#008E96'  # brand teal (style guide); client material is #077354-ish — see DECISIONS
-mp, ms = petg(TEAL), steel()
-obj.data.materials[0] = ms   # unassigned collar -> assumed stainless (TO CONFIRM)
+mp, ms, mz = petg(TEAL), steel(), zinc()
+obj.data.materials[0] = mz   # collar = zinc-plated steel opener ring (client-confirmed)
 obj.data.materials[1] = ms   # tip
 obj.data.materials[2] = mp   # body
 for p in obj.data.polygons:

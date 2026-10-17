@@ -30,7 +30,7 @@ python3 -I scripts/render/trace_profile.py $OUT/mask.png
 
 - Colour: brand teal `#008E96` (the .blend's PETG material is `#077354`-ish — awaiting client confirmation).
 - Standard view transform, exposure −0.7 → lit midtones ≈ `#30989B`.
-- Matte PETG (roughness 0.62) with 0.2 mm layer-line bump; stainless tip + collar (the collar has no
-  material in the model — assumed stainless, awaiting confirmation).
+- Matte PETG (roughness 0.62) with 0.2 mm layer-line bump; stainless tip; zinc-plated steel collar
+  (the opener ring — no material in the model, assigned in the rig).
 - Only the key light casts onto the shadow catcher → compact contact shadow.
 - If the hero camera changes, re-tune `src/features/hero/HeroAnnotations.tsx` (coordinates documented there).
