@@ -53,9 +53,7 @@ export const motion = {
     reveal: 0.9,
   },
   /** Scroll distance of the single pinned sequence, as a % of viewport height. */
-  spinPinLength: { mobile: 100, desktop: 220 },
-  /** Max blur (px) on the motion-blur layer; kept small for mobile GPU cost. */
-  spinMaxBlur: { mobile: 2, desktop: 4 },
+  spinPinLength: { mobile: 150, desktop: 220 },
   /** Scrub smoothing (seconds of catch-up) for scroll-linked timelines. */
   scrub: 0.6,
   /** Max parallax travel (px) for lifestyle/manufacturing imagery. */

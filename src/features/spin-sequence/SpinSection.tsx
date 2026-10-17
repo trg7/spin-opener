@@ -4,16 +4,15 @@ import { ConstructionGeometry } from '@/components/technical/ConstructionGeometr
 import { SideView } from '@/components/technical/TechnicalDrawing'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
-import { assets } from '@/data/assetManifest'
+import { sequencePoster, sequences } from '@/data/assetManifest'
 import { useSpinMotion } from './useSpinMotion'
 
 const copy = siteCopy.spin
-/** Layers hidden by default so the no-JS / reduced-motion state is the spinMotion frame. */
-const hiddenLayer = 'invisible absolute inset-0 opacity-0 max-md:hidden'
 
 /**
  * 02 Spin — the ONE pinned sequence. See ./AGENTS.md and docs/ANIMATION_SPEC.md §2.
- * Layer stack (bottom → top): spinMotion (base, static end state) · spinRest · spinMotionFast · technical.
+ * Layers (bottom → top): construction geometry · poster (last frame; no-JS / reduced motion) ·
+ * canvas (scroll-scrubbed frame sequence) · technical drawing (≥768, fades into frame 1).
  */
 export function SpinSection() {
   const ref = useRef<HTMLElement>(null)
@@ -28,38 +27,33 @@ export function SpinSection() {
       support={copy.support}
       mobileOverlay
       media={
-        <div className="absolute inset-0">
-          <div data-spin="base" className="absolute inset-0">
-            <ResponsiveImage
-              asset={assets.spinMotion}
-              mobileAsset={assets.spinMotionPortrait}
-              className="absolute inset-0"
-              imgClassName="object-cover object-[50%_60%]"
+        <div className="absolute inset-0 bg-warm-white">
+          <div data-spin="geometry" className="absolute inset-0 flex items-center justify-center">
+            <ConstructionGeometry
+              detail="simple"
+              className="w-[125%] max-w-none translate-y-[14%] md:h-[88%] md:w-auto md:translate-y-0"
             />
           </div>
-          <div data-spin="rest" className={hiddenLayer}>
+          <div data-spin="poster" className="absolute inset-0">
             <ResponsiveImage
-              asset={assets.spinRest}
+              asset={sequencePoster(sequences.spin)}
+              mobileAsset={sequencePoster(sequences.spinPortrait)}
               className="absolute inset-0"
-              imgClassName="object-cover object-[50%_60%]"
-              hideBadge
+              imgClassName="object-contain"
             />
           </div>
-          <div data-spin="fast" className={hiddenLayer}>
-            <ResponsiveImage
-              asset={assets.spinMotionFast}
-              className="absolute inset-0"
-              imgClassName="object-cover object-[50%_60%]"
-              hideBadge
-            />
-          </div>
+          <canvas
+            data-spin="canvas"
+            aria-hidden="true"
+            className="invisible absolute inset-0 size-full opacity-0"
+          />
           <div
             data-spin="technical"
             aria-hidden="true"
-            className={`${hiddenLayer} flex items-center justify-center bg-warm-white text-ink-muted`}
+            className="invisible absolute inset-0 flex items-center justify-center bg-warm-white text-ink-muted opacity-0 max-md:hidden"
           >
             <ConstructionGeometry className="absolute left-1/2 top-1/2 h-[88%] -translate-x-1/2 -translate-y-1/2" />
-            <SideView className="relative w-[38%]" />
+            <SideView className="relative w-[34%]" />
           </div>
         </div>
       }

@@ -70,37 +70,6 @@ export const assets = {
     'Approved studio render or photo with alpha (scripts/render/rig.py shot "hero")',
   ),
 
-  // Spin sequence
-  spinRest: ai(
-    'motion/spin-rest.webp',
-    237,
-    126,
-    'SPIN OPENER at rest on a stone surface',
-    'Render/video frame ≥2400×1350',
-  ),
-  spinMotion: ai(
-    'motion/spin-motion-01.webp',
-    237,
-    126,
-    'SPIN OPENER spinning with light motion blur',
-    'Render/video frame ≥2400×1350, same camera as spinRest',
-  ),
-  spinMotionFast: ai(
-    'motion/spin-motion-02.webp',
-    237,
-    130,
-    'SPIN OPENER spinning fast with motion blur',
-    'Render/video frame ≥2400×1350, same camera as spinRest',
-  ),
-  /** Mobile portrait crop from the UX concept board (spin screen). */
-  spinMotionPortrait: ai(
-    'motion/spin-motion-portrait.webp',
-    216,
-    326,
-    'SPIN OPENER spinning on a stone surface',
-    'Portrait render/video frame ≥1290×2000 (9:14), same scene as spinMotion',
-  ),
-
   // Bottle reveal
   bottleUnderside: render(
     'product/underside-render.webp',
@@ -219,6 +188,65 @@ export const assets = {
 } satisfies Record<string, ImageAsset>
 
 export type AssetKey = keyof typeof assets
+
+/** A scroll-scrubbed frame sequence (rendered from the 3D model). */
+export interface ImageSequence {
+  frames: readonly string[]
+  width: number
+  height: number
+  alt: string
+  status: AssetStatus
+  replaceWith: string
+}
+
+const sequence = (
+  dir: string,
+  count: number,
+  width: number,
+  height: number,
+  alt: string,
+  replaceWith: string,
+): ImageSequence => ({
+  frames: Array.from(
+    { length: count },
+    (_, i) => `/assets/${dir}/${String(i + 1).padStart(3, '0')}.webp`,
+  ),
+  width,
+  height,
+  alt,
+  status: 'render',
+  replaceWith,
+})
+
+/** Spin-up sequences: frame 1 = at rest, last = full spin with precession blur. */
+export const sequences = {
+  spin: sequence(
+    'motion/spin',
+    36,
+    1200,
+    825,
+    'SPIN OPENER spinning on its tip',
+    'Re-render with scripts/render/rig.py spin-landscape (or a 2–3 s video split to frames)',
+  ),
+  spinPortrait: sequence(
+    'motion/spin-portrait',
+    36,
+    720,
+    1120,
+    'SPIN OPENER spinning on its tip',
+    'Re-render with scripts/render/rig.py spin-portrait',
+  ),
+} satisfies Record<string, ImageSequence>
+
+/** Static stand-in for a sequence (its last frame) — used for no-JS and reduced motion. */
+export const sequencePoster = (seq: ImageSequence): ImageAsset => ({
+  src: seq.frames[seq.frames.length - 1] ?? null,
+  width: seq.width,
+  height: seq.height,
+  alt: seq.alt,
+  status: seq.status,
+  replaceWith: seq.replaceWith,
+})
 
 /**
  * Unconfirmed colour variants cropped from the board. Kept for when the range is confirmed;

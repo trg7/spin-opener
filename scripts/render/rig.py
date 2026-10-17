@@ -44,6 +44,18 @@ def petg(hex_):
     bump = nt.nodes.new('ShaderNodeBump'); bump.inputs['Strength'].default_value = 0.12
     bump.inputs['Distance'].default_value = 0.00004
     nt.links.new(mix.outputs[0], bump.inputs['Height']); nt.links.new(bump.outputs['Normal'], b.inputs['Normal'])
+    # Z-seam: a faint, slightly darker vertical line at one azimuth (object space -> rotates with the part)
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    at = nt.nodes.new('ShaderNodeMath'); at.operation = 'ARCTAN2'
+    ab = nt.nodes.new('ShaderNodeMath'); ab.operation = 'ABSOLUTE'
+    lt = nt.nodes.new('ShaderNodeMath'); lt.operation = 'LESS_THAN'; lt.inputs[1].default_value = 0.035
+    nt.links.new(tc.outputs['Object'], sep.inputs[0]); nt.links.new(sep.outputs['Y'], at.inputs[0]); nt.links.new(sep.outputs['X'], at.inputs[1])
+    nt.links.new(at.outputs[0], ab.inputs[0]); nt.links.new(ab.outputs[0], lt.inputs[0])
+    seam = nt.nodes.new('ShaderNodeMix'); seam.data_type = 'RGBA'
+    base = b.inputs['Base Color'].default_value[:]
+    seam.inputs['A'].default_value = base
+    seam.inputs['B'].default_value = (base[0] * 0.72, base[1] * 0.72, base[2] * 0.72, 1)
+    nt.links.new(lt.outputs[0], seam.inputs['Factor']); nt.links.new(seam.outputs['Result'], b.inputs['Base Color'])
     return m
 
 def steel():
@@ -119,6 +131,60 @@ def render(name, w, h):
     bpy.ops.render.render(write_still=True)
     print('RENDERED', name)
 
+SPIN_FRAMES = 36
+
+def smooth(e0, e1, x):
+    t = min(max((x - e0) / (e1 - e0), 0.0), 1.0)
+    return t * t * (3 - 2 * t)
+
+def spin_setup():
+    """
+    Keyframed spin-up about the tip: spin (psi) about the body axis, plus precession (phi) of a
+    small tilt (theta). The part is rotationally symmetric, so the visible cue of spinning is the
+    precession smear + seam blur. Output frame f (1..N) = scroll progress (f-1)/(N-1).
+    """
+    fps = 24
+    sc.render.fps = fps
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.6
+    sc.cycles.samples = 96
+    prec = bpy.data.objects.new('precession', None); sc.collection.objects.link(prec)
+    tilt = bpy.data.objects.new('tilt', None); sc.collection.objects.link(tilt)
+    prec.location = (0, 0, ZMIN); tilt.parent = prec
+    bpy.context.view_layer.update()
+    mw = obj.matrix_world.copy(); obj.parent = tilt; obj.matrix_world = mw
+    psi = phi = 0.0
+    for f in range(0, SPIN_FRAMES + 2):  # pad one frame each side for motion-blur sampling
+        t = min(max((f - 1) / (SPIN_FRAMES - 1), 0.0), 1.0)
+        ramp = smooth(0.08, 0.7, t)
+        psi += 2 * math.pi * 42 * ramp / fps
+        phi += 2 * math.pi * 7 * ramp / fps
+        theta = math.radians(3.2) * smooth(0.15, 0.55, t)
+        obj.rotation_euler.z = psi; obj.keyframe_insert('rotation_euler', index=2, frame=f)
+        prec.rotation_euler.z = phi; prec.keyframe_insert('rotation_euler', index=2, frame=f)
+        tilt.rotation_euler.x = theta; tilt.keyframe_insert('rotation_euler', index=0, frame=f)
+    for o in (obj, prec, tilt):
+        for fc in o.animation_data.action.fcurves if hasattr(o.animation_data.action, 'fcurves') else []:
+            for k in fc.keyframe_points: k.interpolation = 'LINEAR'
+
+def render_spin(name, w, h, frames):
+    import os
+    os.makedirs(f'{OUT}/{name}', exist_ok=True)
+    sc.render.resolution_x, sc.render.resolution_y = w, h
+    for f in frames:
+        sc.frame_set(f)
+        sc.render.filepath = f'{OUT}/{name}/{f:03d}.png'
+        bpy.ops.render.render(write_still=True)
+    print('RENDERED', name, len(frames), 'frames')
+
+def spin_frames():
+    # SPIN_RANGE env: "1-36" (default all) or "1,18,36" for tests
+    import os
+    spec = os.environ.get('SPIN_RANGE', f'1-{SPIN_FRAMES}')
+    if '-' in spec:
+        a, b = map(int, spec.split('-')); return list(range(a, b + 1))
+    return [int(x) for x in spec.split(',')]
+
 def underside_setup():
     # Camera below the floor: drop the catcher, light the underside from below/front.
     floor.hide_render = True
@@ -129,6 +195,8 @@ SHOTS_DEF = {
     # elevation, azimuth, distance (m), resolution
     'hero': lambda: (aim(9, -20, 0.29), render('hero', 1600, 2000)),
     'thumb': lambda: (aim(9, -20, 0.30), render('thumb', 1000, 1000)),
+    'spin-landscape': lambda: (spin_setup(), aim(11, -20, 0.36), render_spin('spin-landscape', 1600, 1100, spin_frames())),
+    'spin-portrait': lambda: (spin_setup(), aim(11, -20, 0.40), setattr(cam_data, 'shift_y', 0.16), render_spin('spin-portrait', 900, 1400, spin_frames())),
     'underside': lambda: (underside_setup(), aim(-34, -20, 0.30), render('underside', 1800, 1200)),
 }
 for s in SHOTS:

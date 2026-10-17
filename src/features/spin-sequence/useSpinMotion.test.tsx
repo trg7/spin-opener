@@ -41,10 +41,10 @@ describe('useSpinMotion', () => {
     unmount()
   })
 
-  it('keeps non-base layers hidden in markup (static end state)', () => {
+  it('keeps canvas and technical layers hidden in markup (poster is the static state)', () => {
     mockMedia([motion.queries.reduced])
     const { container } = render(<SpinSection />)
-    for (const layer of ['rest', 'fast', 'technical']) {
+    for (const layer of ['canvas', 'technical']) {
       expect(container.querySelector(`[data-spin="${layer}"]`)?.className).toMatch(/\binvisible\b/)
     }
   })

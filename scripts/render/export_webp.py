@@ -4,8 +4,8 @@ ellipse around the contact point so no rectangular edge shows on the page.
 
   python3 -I scripts/render/export_webp.py in.png out.webp [--shadow CX CY RX RY] [--width W]
 
-CX/CY/RX/RY are fractions of the image size. The object (alpha ≥ 0.97, dilated 4 px) is never
-faded — only the semi-transparent shadow around it.
+CX/CY/RX/RY are fractions of the image size. The object (opaque or visibly coloured, incl.
+motion-blur ghosting; dilated 4 px) is never faded — only the black catcher shadow around it.
 """
 import argparse
 from PIL import Image, ImageChops, ImageFilter
@@ -22,7 +22,13 @@ if a.shadow:
     W, H = im.size
     cx, cy, rx, ry = a.shadow[0] * W, a.shadow[1] * H, a.shadow[2] * W, a.shadow[3] * H
     alpha = im.getchannel('A')
-    obj = alpha.point(lambda v: 255 if v >= 247 else 0).filter(ImageFilter.MaxFilter(9))
+    # Object = opaque pixels OR any visibly coloured pixel (motion-blur ghosting is semi-transparent
+    # but coloured; the catcher shadow is pure black with alpha) — dilated so AA edges are kept.
+    r, g, b, _ = im.split()
+    bright = ImageChops.lighter(ImageChops.lighter(r, g), b).point(lambda v: 255 if v > 30 else 0)
+    opaque = alpha.point(lambda v: 255 if v >= 247 else 0)
+    visible = alpha.point(lambda v: 255 if v > 4 else 0)
+    obj = ImageChops.lighter(opaque, ImageChops.multiply(bright, visible)).filter(ImageFilter.MaxFilter(9))
     # elliptical falloff: 1 inside 55 % of the ellipse, smooth to 0 at its edge
     fall = Image.new('L', im.size)
     px = fall.load()

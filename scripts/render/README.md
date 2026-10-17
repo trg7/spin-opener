@@ -15,6 +15,12 @@ python3 -I scripts/render/export_webp.py $OUT/hero.png      public/assets/produc
 python3 -I scripts/render/export_webp.py $OUT/thumb.png     public/assets/product/top-render.webp       --shadow 0.5 0.80 0.36 0.14 --width 800
 python3 -I scripts/render/export_webp.py $OUT/underside.png public/assets/product/underside-render.webp
 
+# Spin sequences (~33 s/frame on an M1 Pro GPU; SPIN_RANGE=1,18,36 renders a subset for tests)
+$B -b --disable-autoexec references/3d/spin-top.blend --python scripts/render/rig.py -- $OUT spin-landscape
+$B -b --disable-autoexec references/3d/spin-top.blend --python scripts/render/rig.py -- $OUT spin-portrait
+for f in $OUT/spin-landscape/*.png; do python3 -I scripts/render/export_webp.py $f public/assets/motion/spin/$(basename ${f%.png}).webp --shadow 0.5 0.855 0.32 0.13 --width 1200 --quality 80; done
+for f in $OUT/spin-portrait/*.png;  do python3 -I scripts/render/export_webp.py $f public/assets/motion/spin-portrait/$(basename ${f%.png}).webp --shadow 0.5 0.88 0.44 0.105 --width 720 --quality 80; done
+
 # Technical drawing outline (writes <mask>.path.txt → paste into src/components/technical/topGeometry.ts)
 $B -b --disable-autoexec references/3d/spin-top.blend --python scripts/render/side_mask.py -- $OUT/mask.png
 python3 -I scripts/render/trace_profile.py $OUT/mask.png
