@@ -46,7 +46,7 @@ export function HeroSection({ product }: { product: Product }) {
         {/* Copy */}
         <div className="relative z-10 flex flex-col gap-5 lg:col-span-4 lg:justify-center lg:gap-7">
           <Eyebrow className="hidden lg:block">{copy.origin}</Eyebrow>
-          <h1 id="hero-heading" className="text-display-xl font-light">
+          <h1 id="hero-heading" className="type-hero">
             {copy.headingLines.map((line) => (
               <span key={line} data-hero="line" className="block">
                 {line}

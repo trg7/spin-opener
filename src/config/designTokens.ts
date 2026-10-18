@@ -32,6 +32,36 @@ export const fonts = {
   utility: "'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif",
 } as const
 
+/**
+ * Spacing scale (px). The only steps used for layout spacing; mirrored as `--spacing-s<px>`
+ * in theme.css (`gap-s24`, `py-s64`, …).
+ */
+export const space = { s8: 8, s16: 16, s24: 24, s40: 40, s64: 64, s120: 120 } as const
+
+/** Page grid. Responsive values switch at the `lg` breakpoint (1024px). */
+export const layout = {
+  columns: 12,
+  /** Max content width (px), gutters excluded. */
+  pageMax: 1440,
+  /** Gutter = clamp(min, vw, max). */
+  gutter: { min: 20, vw: 5.25, max: 76 },
+  gridGap: { base: 20, desktop: 24 },
+  /** Vertical padding of standard sections. */
+  section: { base: space.s64, desktop: space.s120 },
+} as const
+
+/** Type roles → `type-<role>` utilities in global.css. See docs/DESIGN_SYSTEM.md. */
+export const typeRoles = [
+  'hero',
+  'editorial',
+  'section',
+  'title',
+  'body',
+  'small',
+  'label',
+  'caption',
+] as const
+
 /** Design widths. Mobile-first: 390 is the primary canvas. */
 export const breakpoints = {
   mobile: 390,

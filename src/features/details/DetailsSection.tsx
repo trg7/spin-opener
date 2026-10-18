@@ -27,7 +27,7 @@ export function DetailsSection() {
         <div className="flex flex-col gap-8 lg:col-span-4">
           <div className="flex flex-col gap-4">
             <Eyebrow>{copy.index}</Eyebrow>
-            <h2 id="details-heading" className="text-display-l font-light">
+            <h2 id="details-heading" className="type-section">
               {copy.heading}
             </h2>
           </div>

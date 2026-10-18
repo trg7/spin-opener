@@ -67,18 +67,17 @@ export function SpinSection() {
         /* clear of the sticky purchase bar (64px + safe area) */
         <div
           data-spin="footnote-mobile"
-          className="absolute inset-x-0 bottom-24 flex flex-col items-center gap-3 md:hidden"
+          className="absolute inset-x-0 bottom-24 flex flex-col items-center gap-s16 md:hidden"
         >
           <span aria-hidden="true" className="h-6 w-px bg-charcoal/50" />
-          <p className="font-utility text-label font-medium uppercase text-charcoal/80">
-            {copy.footnote}
-          </p>
+          <p className="type-caption text-charcoal/80">{copy.footnote}</p>
         </div>
       }
     >
       <p
         data-spin="footnote"
-        className="mt-6 hidden font-utility text-label font-medium uppercase text-ink-muted md:block"
+        data-intro-action
+        className="hidden type-caption text-ink-muted md:block"
       >
         {copy.footnote}
       </p>

@@ -10,9 +10,5 @@ export function Eyebrow({
   className?: string
   as?: 'p' | 'span' | 'dt'
 }) {
-  return (
-    <Tag className={`font-utility text-label font-medium uppercase text-ink-muted ${className}`}>
-      {children}
-    </Tag>
-  )
+  return <Tag className={`type-label text-ink-muted ${className}`}>{children}</Tag>
 }

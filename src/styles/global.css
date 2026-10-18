@@ -22,6 +22,98 @@
   }
 }
 
+/* Layout variables. Grid gap 20 → 24px and section rhythm 64 → 120px from 1024px. */
+:root {
+  --page-max: 90rem;
+  --page-inset: max(var(--spacing-gutter), (100vw - var(--page-max)) / 2);
+}
+@media (min-width: 64rem) {
+  :root {
+    --spacing-grid: 1.5rem;
+    --spacing-section: 7.5rem;
+  }
+}
+
+/* 12-column page grid (use from md/lg; below that sections flow in a single column). */
+@utility grid-page {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--spacing-grid);
+}
+
+/* Trim a text box to cap height → baseline so spacing tokens measure optically. */
+@utility trim-cap {
+  text-box: trim-both cap alphabetic;
+}
+
+/* Full-bleed media inside a .page-x container. */
+@utility bleed-x {
+  margin-inline: calc(-1 * var(--page-inset));
+}
+@utility bleed-right {
+  margin-left: 0;
+  margin-right: calc(-1 * var(--page-inset));
+}
+
+/*
+ * Type roles. Display roles are trimmed to cap height → baseline (where supported) and pulled
+ * left by their side bearing, so headings align optically with labels and body copy.
+ */
+@utility type-hero {
+  font-size: var(--text-hero);
+  line-height: var(--text-hero--line-height);
+  letter-spacing: var(--text-hero--letter-spacing);
+  font-weight: 300;
+  margin-inline-start: -0.045em;
+  text-box: trim-both cap alphabetic;
+}
+@utility type-editorial {
+  font-size: var(--text-editorial);
+  line-height: var(--text-editorial--line-height);
+  letter-spacing: var(--text-editorial--letter-spacing);
+  font-weight: 300;
+  margin-inline-start: -0.04em;
+  text-box: trim-both cap alphabetic;
+}
+@utility type-section {
+  font-size: var(--text-section);
+  line-height: var(--text-section--line-height);
+  letter-spacing: var(--text-section--letter-spacing);
+  font-weight: 300;
+  margin-inline-start: -0.04em;
+  text-box: trim-both cap alphabetic;
+}
+@utility type-title {
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
+  letter-spacing: var(--text-title--letter-spacing);
+  font-weight: 300;
+}
+@utility type-body {
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
+@utility type-small {
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+@utility type-label {
+  font-family: var(--font-utility);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@utility type-caption {
+  font-family: var(--font-utility);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  letter-spacing: var(--text-caption--letter-spacing);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -34,23 +126,37 @@
 }
 
 @layer components {
-  /* Page container: 1440 max, mobile gutter 20px (safe-area aware), 40px tablet, 64px desktop */
+  /*
+   * Page frame. Gutter ≈ 5.25vw (20px at 390 → 76px at 1440), safe-area aware.
+   * Content is capped at --page-max; --page-inset is the distance from the viewport edge to
+   * the content edge at any width, so media can bleed to the edge (`bleed-*`).
+   */
   .page-x {
-    padding-inline: max(1.25rem, env(safe-area-inset-left), env(safe-area-inset-right));
-  }
-  @media (min-width: 48rem) {
-    .page-x {
-      padding-inline: 2.5rem;
-    }
-  }
-  @media (min-width: 80rem) {
-    .page-x {
-      padding-inline: 4rem;
-    }
+    padding-inline: max(
+      var(--spacing-gutter),
+      env(safe-area-inset-left),
+      env(safe-area-inset-right)
+    );
   }
   .page-container {
     margin-inline: auto;
-    max-width: 90rem;
+    max-width: var(--page-max);
+  }
+
+  /*
+   * Section intro rhythm: index → heading → support 24px; → action 40px.
+   * Children stay direct descendants so section motion can target them individually.
+   */
+  .section-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-intro > * + * {
+    margin-top: var(--spacing-s24);
+  }
+  .section-intro > * + :where(a, button, [data-intro-action]) {
+    margin-top: var(--spacing-s40);
   }
 
   /* Feathers a rectangular placeholder photo into the page (real renders will be cutouts). */

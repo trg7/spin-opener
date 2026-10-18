@@ -1,8 +1,10 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { colors } from '@/config/designTokens'
+import { colors, layout, space, typeRoles } from '@/config/designTokens'
 
 const themeCss = readFileSync(resolve(__dirname, '../src/styles/theme.css'), 'utf8')
+const globalCss = readFileSync(resolve(__dirname, '../src/styles/global.css'), 'utf8')
+const rem = (px: number) => `${px / 16}rem`
 const kebab = (s: string) => s.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)
 
 const luminance = (hex: string) => {
@@ -37,5 +39,25 @@ describe('design tokens', () => {
     expect(contrast(colors.charcoal, colors.warmWhite)).toBeGreaterThanOrEqual(4.5)
     expect(contrast(colors.inkMuted, colors.warmWhite)).toBeGreaterThanOrEqual(4.5)
     expect(contrast(colors.inkMuted, colors.paper)).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it.each(Object.entries(space))('theme.css mirrors spacing step %s', (name, px) => {
+    expect(themeCss).toContain(`--spacing-${name}: ${rem(px)};`)
+  })
+
+  it('mirrors the page grid', () => {
+    const { min, vw, max } = layout.gutter
+    expect(themeCss).toContain(`--spacing-gutter: clamp(${rem(min)}, ${vw}vw, ${rem(max)});`)
+    expect(themeCss).toContain(`--spacing-grid: ${rem(layout.gridGap.base)};`)
+    expect(themeCss).toContain(`--spacing-section: ${rem(layout.section.base)};`)
+    expect(globalCss).toContain(`--spacing-grid: ${rem(layout.gridGap.desktop)};`)
+    expect(globalCss).toContain(`--spacing-section: ${rem(layout.section.desktop)};`)
+    expect(globalCss).toContain(`--page-max: ${rem(layout.pageMax)};`)
+    expect(globalCss).toContain(`repeat(${layout.columns}, minmax(0, 1fr))`)
+  })
+
+  it.each(typeRoles)('defines type role %s', (role) => {
+    expect(themeCss).toContain(`--text-${role}:`)
+    expect(globalCss).toContain(`@utility type-${role} {`)
   })
 })

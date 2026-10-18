@@ -30,7 +30,7 @@ export function LifestyleStandSection() {
     >
       <a
         href="#shop"
-        className="mt-2 inline-flex min-h-11 items-center gap-2 self-start font-utility text-label font-medium uppercase text-charcoal underline-offset-4 hover:underline"
+        className="relative inline-flex items-center gap-s8 type-label before:absolute before:-inset-y-4 before:inset-x-0 text-charcoal underline-offset-4 hover:underline"
       >
         {copy.exploreStand}
         <ArrowRightIcon size={14} />

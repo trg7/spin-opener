@@ -82,7 +82,7 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
               <a
                 href={l.href}
                 onClick={() => menuRef.current?.hidePopover()}
-                className="flex min-h-14 items-center text-display-m font-light text-charcoal"
+                className="flex min-h-14 items-center type-title text-charcoal"
               >
                 {l.label}
               </a>

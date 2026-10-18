@@ -44,7 +44,7 @@ export function ProductConfigurator() {
       <div className="page-container">
         <div className="flex flex-col gap-4">
           <Eyebrow>{copy.index}</Eyebrow>
-          <h2 id="shop-heading" className="text-display-l font-light">
+          <h2 id="shop-heading" className="type-section">
             {copy.headingLines.map((line) => (
               <span key={line} className="block lg:inline">
                 {line}{' '}

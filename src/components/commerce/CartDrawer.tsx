@@ -43,7 +43,7 @@ export function CartDrawer() {
       </div>
 
       <div className="page-x flex flex-1 flex-col items-start justify-center gap-6 overflow-y-auto py-10 md:px-8">
-        <p className="text-display-m font-light">{siteCopy.commerce.emptyBag}</p>
+        <p className="type-title">{siteCopy.commerce.emptyBag}</p>
         <Button variant="text" onClick={closeCart}>
           {siteCopy.commerce.continueShopping}
         </Button>
