@@ -29,9 +29,10 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
-          <div className="flex flex-col gap-s8 type-small text-ink-muted md:col-span-4 md:col-start-9">
-            <p>{siteCopy.footer.shipping}</p>
-            <p>{siteCopy.footer.contact}</p>
+          {/* Same label style and 44px rows as the nav, so each line sits level with a link */}
+          <div className="-my-s16 flex flex-col type-label text-ink-muted md:col-span-4 md:col-start-9">
+            <p className="flex min-h-11 items-center">{siteCopy.footer.shipping}</p>
+            <p className="flex min-h-11 items-center">{siteCopy.footer.contact}</p>
           </div>
         </div>
         <p className="mt-s64 border-t border-grid pt-s24 type-caption text-ink-muted">
