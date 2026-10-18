@@ -5,8 +5,7 @@
  */
 const line = { stroke: 'currentColor', strokeWidth: 1, vectorEffect: 'non-scaling-stroke' } as const
 
-const labelClass =
-  'absolute font-utility text-[0.625rem] font-medium uppercase leading-snug tracking-[0.14em] text-ink-muted'
+const labelClass = 'absolute type-caption text-ink-muted'
 
 export function HeroAnnotations({
   labels,

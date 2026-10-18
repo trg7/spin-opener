@@ -27,8 +27,11 @@ export function HeroSection({ product }: { product: Product }) {
 
   /** Rendered twice (mobile foot / desktop copy column); only the mobile one is observed by the sticky bar. */
   const purchase = (observed: boolean) => (
-    <div data-hero="purchase" className="flex items-center justify-between gap-6 lg:justify-start">
-      <Price money={variant.price} className="text-2xl font-light lg:text-[1.75rem]" />
+    <div
+      data-hero="purchase"
+      className="flex items-center justify-between gap-s24 lg:justify-start"
+    >
+      <Price money={variant.price} className="type-price" />
       <div {...(observed ? { 'data-hero-cta': '' } : {})}>
         <AddToBagButton variantId={variant.id} quantity={1} />
       </div>
@@ -42,25 +45,27 @@ export function HeroSection({ product }: { product: Product }) {
       aria-labelledby="hero-heading"
       className="page-x relative overflow-x-clip"
     >
-      <div className="page-container flex min-h-[calc(100svh-4rem)] flex-col pb-6 pt-6 md:pt-10 lg:grid lg:min-h-[44rem] lg:grid-cols-12 lg:gap-x-8 lg:pb-12 lg:pt-12">
+      <div className="page-container flex min-h-[calc(100svh-4rem)] flex-col gap-s24 pb-s24 pt-s24 md:pt-s40 lg:grid-page lg:min-h-[44rem] lg:gap-y-0 lg:pb-s64 lg:pt-s40">
         {/* Copy */}
-        <div className="relative z-10 flex flex-col gap-5 lg:col-span-4 lg:justify-center lg:gap-7">
-          <Eyebrow className="hidden lg:block">{copy.origin}</Eyebrow>
-          <h1 id="hero-heading" className="type-hero">
+        <div className="section-intro relative z-10 lg:col-span-4 lg:justify-center">
+          <Eyebrow className="trim-cap hidden lg:block">{copy.origin}</Eyebrow>
+          <h1 id="hero-heading" className="type-hero max-lg:mt-0!">
             {copy.headingLines.map((line) => (
               <span key={line} data-hero="line" className="block">
                 {line}
               </span>
             ))}
           </h1>
-          <p data-hero="support" className="max-w-[22ch] text-body text-ink-muted lg:max-w-[30ch]">
+          <p data-hero="support" className="max-w-[22ch] type-body text-ink-muted lg:max-w-[30ch]">
             {copy.supportLines.map((line) => (
               <span key={line} className="block lg:inline">
                 {line}{' '}
               </span>
             ))}
           </p>
-          <div className="hidden lg:mt-4 lg:block">{purchase(false)}</div>
+          <div data-intro-action className="hidden lg:block">
+            {purchase(false)}
+          </div>
         </div>
 
         {/* Object stage */}
@@ -87,8 +92,8 @@ export function HeroSection({ product }: { product: Product }) {
         </div>
 
         {/* Mobile foot: origin + price/CTA */}
-        <div data-hero="foot" className="flex flex-col gap-4 lg:hidden">
-          <div className="border-t border-grid pt-3">
+        <div data-hero="foot" className="flex flex-col gap-s16 lg:hidden">
+          <div className="border-t border-grid pt-s16">
             <Eyebrow>{copy.origin}</Eyebrow>
           </div>
           {purchase(true)}
@@ -97,16 +102,14 @@ export function HeroSection({ product }: { product: Product }) {
         {/* Desktop feature row */}
         <ul
           data-hero="features"
-          className="hidden border-t border-grid pt-6 lg:col-span-10 lg:mt-4 lg:flex lg:gap-14"
+          className="hidden border-t border-grid pt-s24 lg:col-span-10 lg:mt-s24 lg:flex lg:gap-s64"
         >
           {copy.features.map((f, i) => {
             const Icon = featureIcons[i] ?? BookmarkIcon
             return (
-              <li key={f} className="flex items-center gap-3">
+              <li key={f} className="flex items-center gap-s16">
                 <Icon size={18} className="text-ink-muted" />
-                <span className="max-w-[16ch] font-utility text-[0.625rem] font-medium uppercase leading-snug tracking-[0.14em] text-ink-muted">
-                  {f}
-                </span>
+                <span className="max-w-[16ch] type-caption text-ink-muted">{f}</span>
               </li>
             )
           })}

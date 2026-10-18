@@ -14,15 +14,13 @@ export function TechnicalViews({
     { key: 'bottom', label: labels.bottom, drawing: <BottomView className="size-full" /> },
   ]
   return (
-    <ul className={`flex flex-col gap-5 ${className}`}>
+    <ul className={`flex flex-col gap-s24 ${className}`}>
       {panels.map((p) => (
-        <li key={p.key} className="flex flex-col items-center gap-2">
-          <div className="flex aspect-square w-full items-center justify-center border border-grid p-4 text-ink-muted">
+        <li key={p.key} className="flex flex-col items-center gap-s8">
+          <div className="flex aspect-square w-full items-center justify-center border border-grid p-s16 text-ink-muted">
             {p.drawing}
           </div>
-          <span className="font-utility text-[0.5625rem] font-medium uppercase tracking-[0.14em] text-ink-muted">
-            {p.label}
-          </span>
+          <span className="type-caption text-ink-muted">{p.label}</span>
         </li>
       ))}
     </ul>

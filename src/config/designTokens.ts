@@ -58,6 +58,7 @@ export const typeRoles = [
   'title',
   'body',
   'small',
+  'price',
   'label',
   'caption',
 ] as const

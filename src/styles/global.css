@@ -97,6 +97,13 @@
   font-size: var(--text-small);
   line-height: var(--text-small--line-height);
 }
+@utility type-price {
+  font-size: var(--text-price);
+  line-height: var(--text-price--line-height);
+  letter-spacing: var(--text-price--letter-spacing);
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
 @utility type-label {
   font-family: var(--font-utility);
   font-size: var(--text-label);

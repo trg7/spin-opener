@@ -96,7 +96,7 @@ export function ProductConfigurator() {
                 <QuantityStepper value={quantity} onChange={setQuantity} label={copy.quantity} />
               </div>
               <div className="flex flex-col items-end gap-1" aria-live="polite">
-                <Price money={variant?.price ?? null} className="text-2xl font-light" />
+                <Price money={variant?.price ?? null} className="type-price" />
                 {variant?.priceStatus === 'provisional' && (
                   <span className="font-utility text-[0.5625rem] uppercase tracking-[0.14em] text-ink-muted">
                     {copy.provisionalPrice}
