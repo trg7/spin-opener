@@ -17,7 +17,7 @@ complexity on mobile. Implemented in Stage 2. All numbers live in `designTokens.
 
 > Since D-050 the header is sticky: the spin pin starts below it (`top <header>px` / centred in the space under it) and anchors land below it.
 >
-> Page order since D-047: Hero → Spin → **Lifestyle + stand (03)** → **Reveal (04)** → Configurator → Details → Making. Row numbers below are the original spec ids.
+> Page order since D-051: Hero → Spin → **Reveal (03)** → **Lifestyle + stand (04)** → Configurator → Details → Making. Row numbers below are the original spec ids.
 
 | #   | Section                 | Trigger (start → end)                                                                                    | Behaviour                                                                                                                                                                                      | <768                                                                                | Reduced motion             |
 | --- | ----------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |

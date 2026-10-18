@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const sections = ['top', 'story', 'lifestyle', 'reveal', 'shop', 'details', 'making']
+const sections = ['top', 'story', 'reveal', 'lifestyle', 'shop', 'details', 'making']
 
 /** Scroll the whole page so lazy images load, then return to top. */
 async function loadLazyImages(page: Page) {
