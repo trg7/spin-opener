@@ -19,10 +19,10 @@ export function SwatchGroup({ legend, options, value, onChange }: Props) {
   const selected = options.find((o) => o.id === value)
   return (
     <fieldset>
-      <legend className="mb-3 font-utility text-label font-medium uppercase text-ink-muted">
-        {legend} {selected && <span className="ml-1 text-charcoal">{selected.label}</span>}
+      <legend className="mb-s8 type-label text-ink-muted">
+        {legend} {selected && <span className="ml-s8 text-charcoal">{selected.label}</span>}
       </legend>
-      <div className="flex flex-wrap gap-1">
+      <div className="-ml-2 flex flex-wrap">
         {options.map((o) => (
           <label
             key={o.id}

@@ -16,9 +16,17 @@ export function SetupOption({ product, name, checked, onSelect }: Props) {
   const variant = product.variants[0]
   const image = assets[product.imageKey as AssetKey]
   const descId = useId()
+  const radioMark = (
+    <span
+      aria-hidden="true"
+      className={`hidden size-4 shrink-0 rounded-full border lg:block ${
+        checked ? 'border-charcoal bg-charcoal ring-2 ring-inset ring-paper' : 'border-grid'
+      }`}
+    />
+  )
   return (
     <label
-      className={`group relative flex cursor-pointer items-center gap-4 rounded-card border p-3 transition-colors lg:flex-col lg:items-stretch lg:gap-3 ${
+      className={`group relative flex h-full cursor-pointer items-center gap-s16 rounded-card border p-s16 transition-colors lg:flex-col lg:items-stretch ${
         checked ? 'border-charcoal bg-paper' : 'border-grid bg-paper/60 hover:border-ink-muted'
       } has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-teal`}
     >
@@ -39,21 +47,22 @@ export function SetupOption({ product, name, checked, onSelect }: Props) {
         className="size-16 shrink-0 overflow-hidden rounded-[0.25rem] lg:aspect-[4/3] lg:size-auto lg:w-full"
         imgClassName="object-cover"
       />
-      <span className="flex min-w-0 flex-1 flex-col gap-1">
-        <span className="font-utility text-label font-medium uppercase">{product.title}</span>
-        <span id={`${descId}-sub`} className="text-sm text-ink-muted">
+      <span className="flex min-w-0 flex-1 flex-col gap-s8 lg:pt-s8">
+        <span className="flex items-center justify-between gap-s8">
+          <span className="type-label">{product.title}</span>
+          {radioMark}
+        </span>
+        <span id={`${descId}-sub`} className="type-small text-ink-muted">
           {product.subtitle}
         </span>
       </span>
-      <span id={`${descId}-price`} className="shrink-0 text-sm lg:text-base">
+      {/* Price sits on the card foot (≥1024) so all three line up regardless of copy length */}
+      <span
+        id={`${descId}-price`}
+        className="shrink-0 type-small lg:mt-auto lg:border-t lg:border-grid lg:pt-s16 lg:type-body"
+      >
         <Price money={variant?.price ?? null} />
       </span>
-      <span
-        aria-hidden="true"
-        className={`absolute right-3 top-3 hidden size-4 rounded-full border lg:block ${
-          checked ? 'border-charcoal bg-charcoal ring-2 ring-inset ring-paper' : 'border-grid'
-        }`}
-      />
     </label>
   )
 }
