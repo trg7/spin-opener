@@ -5,32 +5,26 @@ Curious object. Quiet humour."). Tokens: `src/config/designTokens.ts` ↔ `src/s
 
 ## Colour
 
-| Token                   | Hex       | Use                                                                                           |
-| ----------------------- | --------- | --------------------------------------------------------------------------------------------- |
-| `warm-white`            | `#F3F1ED` | Page background                                                                               |
-| `charcoal`              | `#222322` | Text, primary buttons (pill, charcoal fill, warm-white label), dark stand                     |
-| `teal`                  | `#008E96` | Product colour, focus ring, selected-state accents (sparingly — the product carries the teal) |
-| `grid`                  | `#D4D1CB` | Construction lines, hairlines, dividers, card borders                                         |
-| `sage`                  | `#7D806F` | Rare secondary accent (technical callouts)                                                    |
-| `ink-muted` _(derived)_ | `#5F5E5A` | Secondary text; ≥4.5:1 on warm-white and paper (tested)                                       |
-| `paper` _(derived)_     | `#F9F8F5` | Raised configurator option surfaces (boards show slightly lighter cards)                      |
+### Type roles (D-049)
 
-Photography supplies the remaining palette (terrazzo, timber, amber glass). No gradients.
+One role per job. Use the `type-<role>` utilities (`src/styles/global.css`); sizes live in
+`theme.css` and the role list is mirrored in `designTokens.ts` (`typeRoles`, parity-tested).
 
-## Typography
+| Utility          | Use                                                        | 390px | 1440px |
+| ---------------- | ---------------------------------------------------------- | ----- | ------ |
+| `type-hero`      | The one H1                                                 | 52px  | 104px  |
+| `type-editorial` | Story-band headings (spin, lifestyle, reveal, making)      | 38px  | 68px   |
+| `type-section`   | Functional section headings (shop, details)                | 34px  | 52px   |
+| `type-title`     | Menu items, drawer empty state                             | 28px  | 40px   |
+| `type-price`     | Primary prices (hero, configurator)                        | 24px  | 28px   |
+| `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                 | 16px  | 16px   |
+| `type-small`     | Notes, card subtitles, spec values, footer info            | 14px  | 14px   |
+| `type-label`     | Uppercase utility: nav, buttons, section index, spec terms | 11px  | 11px   |
+| `type-caption`   | Technical metadata: annotations, figure captions, badges   | 10px  | 10px   |
 
-- **Display** — light grotesk, restrained tracking. Weight ~300, tracking −0.02 to −0.03em, tight leading (0.98–1.08). Sentence case with full stops ("Made to spin.").
-- **Utility** — uppercase, compact, precise. 11px, weight ~500, tracking 0.14em. Used for nav, eyebrows ("01 / Hero"), annotations, button labels, price labels in lists.
-- **Body** — 15–16px, weight ~350, 1.45 leading, max ~34ch on mobile.
-- Provisional family: **Inter Tight Variable** (self-hosted via Fontsource, OFL). Swap in `designTokens.ts` + `theme.css` if a licensed face (e.g. Neue Montreal, Suisse Int'l) is chosen.
-
-| Token                                    | 390px | 1440px |
-| ---------------------------------------- | ----- | ------ |
-| `text-display-xl` (hero)                 | 52px  | 104px  |
-| `text-display-l` (section)               | 38px  | 68px   |
-| `text-display-m` (configurator, details) | 28px  | 40px   |
-| `text-body`                              | 16px  | 16px   |
-| `text-label`                             | 11px  | 11px   |
+Display roles (hero/editorial/section) are trimmed to cap height → baseline (`text-box`) and
+pulled left by their side bearing, so a heading's first stroke lines up with the label above it
+and spacing tokens measure optically. Browsers without `text-box` fall back to slightly looser gaps.
 
 ## Identity
 
@@ -40,7 +34,18 @@ re-typeset it. Minimum height 32px (mobile header 36px, desktop 44px) so the cap
 
 ## Layout
 
-- Mobile canvas 390, 16–20px side gutters, safe-area aware. Tablet 768. Desktop design width 1440, 12-col grid, ~64px gutters.
+- **Grid (D-049)** — 12 columns from 1024px (`grid-page`), single-column flow below. Content max
+  1440px (`--page-max`). Gutter `clamp(20px, 5.25vw, 76px)` (`page-x`, safe-area aware); column
+  gap 20px → 24px at 1024 (`gap-grid`). `--page-inset` = viewport edge → content edge, for
+  edge-bleeding media (`bleed-x`, `bleed-right`).
+- **Spacing scale** — 8 · 16 · 24 · 40 · 64 · 120 (`*-s8` … `*-s120`). Section padding
+  `py-section` = 64px → 120px at 1024. Prefer these over Tailwind's numeric steps for layout.
+- **Section intro rhythm** (`SectionIntro`): index → heading 24 · heading → support 24 ·
+  → action/footnote 40. Index = `SectionIndex` ("02" + 24px hairline), on every numbered section.
+- **Shared column lines** — copy starts at col 1; band media, details drawings/close-ups and the
+  footer nav all start at col 6; shop controls at col 8; footer info at col 9.
+- **Split bands** — copy cols 1–5, vertically centred on the media; media cols 6–12 bleeding right,
+  `min-h-band` (640px), `object-cover`. The box sets the size, never the image's own ratio.
 - Controlled asymmetry: copy left-aligned in narrow columns; object large and slightly off-centre.
 - Hairline dividers (`grid`) between sections on light backgrounds; photographic sections run full-bleed.
 - Cards: 1px `grid` border, `radius-card` 6px max, no shadows. Selected = 1px charcoal border.

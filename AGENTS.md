@@ -73,7 +73,8 @@ Add a feature-level `AGENTS.md` only when a feature has non-obvious rules (e.g. 
 ## 5. Design constraints (non-negotiable)
 
 - Palette from the style guide only: warm white `#F3F1ED`, charcoal `#222322`, teal `#008E96`, grid `#D4D1CB`, sage `#7D806F` (+ two derived tones in `designTokens.ts`). No gradients, no new accent colours.
-- Type: light grotesk display with restrained tracking; small uppercase letter-spaced utility labels. Tokens only.
+- Type: light grotesk display with restrained tracking; small uppercase letter-spaced utility labels. Use the `type-<role>` utilities only (D-049, `docs/DESIGN_SYSTEM.md`).
+- Layout: 12-col `grid-page`, `page-x` gutters, spacing scale `*-s8 … *-s120`, `py-section`, `SectionIntro` for numbered sections. No arbitrary spacing or font sizes in components.
 - Use the **original wordmark asset** (`assets.brandWordmark`, centred lockup with rule). Never redraw, re-typeset or alter it.
 - Fine construction circles / technical grid in SVG, hairline weight, `grid` colour.
 - Generous negative space, controlled asymmetry. Avoid stock UI gradients, heavily rounded cards, emoji, loud sales copy, template styling.
