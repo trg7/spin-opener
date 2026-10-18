@@ -18,19 +18,31 @@ export function fadeUpOnEnter(targets: Targets, trigger: Element, start = 'top 7
   })
 }
 
+/** Overscan scale applied to parallax media so its edges stay outside the frame. */
+const PARALLAX_SCALE = 1.1
+
 /**
  * Scrubbed vertical parallax. The target is scaled up slightly so its edges never show
- * inside an `overflow-hidden` frame.
+ * inside an `overflow-hidden` frame; travel is capped to what that overscan covers
+ * (half the extra height), so tall travel on a short band can't expose the frame edge.
  */
 export function parallax(target: Targets, trigger: Element, distance: number) {
+  const travel = (_: number, el: HTMLElement) =>
+    Math.min(distance, (el.offsetHeight * (PARALLAX_SCALE - 1)) / 2)
   return gsap.fromTo(
     target,
-    { y: -distance, scale: 1.1 },
+    { y: (i: number, el: HTMLElement) => -travel(i, el), scale: PARALLAX_SCALE },
     {
-      y: distance,
-      scale: 1.1,
+      y: travel,
+      scale: PARALLAX_SCALE,
       ease: 'none',
-      scrollTrigger: { trigger, start: 'top bottom', end: 'bottom top', scrub: true },
+      scrollTrigger: {
+        trigger,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
     },
   )
 }

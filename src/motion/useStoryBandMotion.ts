@@ -18,7 +18,9 @@ export function useStoryBandMotion(
       const mm = gsap.matchMedia()
       mm.add({ small: motion.queries.small, large: motion.queries.large }, (ctx) => {
         fadeUpOnEnter(section.querySelectorAll('[data-motion="copy"] > *'), section)
-        const media = section.querySelector('[data-motion="media"] > :first-child')
+        // Move the photo, not its wrapper, so the placeholder badge stays put in the frame corner.
+        const layer = section.querySelector('[data-motion="media"] > :first-child')
+        const media = layer?.querySelector('picture') ?? layer
         if (withParallax && media) {
           const small = Boolean(ctx.conditions?.small)
           parallax(media, section, small ? motion.parallax.mobile : motion.parallax.desktop)
