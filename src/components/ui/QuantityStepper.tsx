@@ -29,7 +29,7 @@ export function QuantityStepper({ value, min = 1, max = 10, onChange, label, siz
       >
         <MinusIcon size={16} />
       </button>
-      <output aria-live="polite" className="min-w-6 text-center text-sm tabular-nums">
+      <output aria-live="polite" className="min-w-6 text-center type-small tabular-nums">
         {value}
       </output>
       <button

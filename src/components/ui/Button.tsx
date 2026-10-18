@@ -13,11 +13,12 @@ interface StyleProps {
 }
 
 const base =
-  'inline-flex min-h-11 items-center justify-center gap-3 rounded-pill font-utility text-label font-medium uppercase transition-[background-color,color,transform] duration-200 ease-out-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40'
+  'inline-flex min-h-11 items-center justify-center gap-s16 rounded-pill type-label transition-[background-color,color,transform] duration-200 ease-out-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40'
 
 const variants: Record<Variant, string> = {
-  primary: 'h-12 bg-charcoal px-7 text-warm-white hover:bg-black',
-  outline: 'h-12 border border-charcoal px-7 text-charcoal hover:bg-charcoal hover:text-warm-white',
+  primary: 'h-12 bg-charcoal px-s24 text-warm-white hover:bg-black',
+  outline:
+    'h-12 border border-charcoal px-s24 text-charcoal hover:bg-charcoal hover:text-warm-white',
   text: 'px-0 text-charcoal underline-offset-4 hover:underline',
 }
 

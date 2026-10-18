@@ -19,13 +19,13 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
           <Wordmark className="h-9 md:h-11" />
         </a>
 
-        <nav aria-label="Primary" className="flex items-center gap-1 md:gap-8">
-          <ul className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Primary" className="flex items-center gap-1 md:gap-s40">
+          <ul className="hidden items-center gap-s40 md:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="font-utility text-label font-medium uppercase text-charcoal underline-offset-8 hover:underline"
+                  className="type-label text-charcoal underline-offset-8 hover:underline"
                 >
                   {l.label}
                 </a>
@@ -63,7 +63,7 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
         id={MENU_ID}
         ref={menuRef}
         popover="auto"
-        className="page-x m-0 mt-0 w-full max-w-none border-b border-grid bg-warm-white pb-6 [inset:0_0_auto_0]"
+        className="page-x m-0 mt-0 w-full max-w-none border-b border-grid bg-warm-white pb-s24 [inset:0_0_auto_0]"
       >
         <div className="flex h-16 items-center justify-end">
           <button

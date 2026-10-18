@@ -48,10 +48,10 @@ export function StickyPurchaseBar({ product }: { product: Product }) {
     >
       <div className="page-x flex h-16 items-center justify-between gap-4">
         <div className="flex flex-col leading-tight">
-          <span className="font-utility text-label font-medium uppercase">{product.title}</span>
-          <Price money={variant.price} className="text-sm text-ink-muted" />
+          <span className="type-label">{product.title}</span>
+          <Price money={variant.price} className="type-small text-ink-muted" />
         </div>
-        <AddToBagButton variantId={variant.id} quantity={1} className="h-11 px-5" />
+        <AddToBagButton variantId={variant.id} quantity={1} className="h-11 px-s24" />
       </div>
     </div>
   )

@@ -28,8 +28,8 @@ export function CartDrawer() {
       aria-labelledby="cart-title"
       className="drawer m-0 ml-auto h-dvh max-h-none w-full max-w-[26rem] bg-warm-white p-0 text-charcoal open:flex open:flex-col"
     >
-      <div className="page-x flex h-16 shrink-0 items-center justify-between border-b border-grid md:px-8">
-        <h2 id="cart-title" className="font-utility text-label font-medium uppercase">
+      <div className="page-x flex h-16 shrink-0 items-center justify-between border-b border-grid md:px-s40">
+        <h2 id="cart-title" className="type-label">
           {siteCopy.commerce.bagTitle}
         </h2>
         <button
@@ -42,7 +42,7 @@ export function CartDrawer() {
         </button>
       </div>
 
-      <div className="page-x flex flex-1 flex-col items-start justify-center gap-6 overflow-y-auto py-10 md:px-8">
+      <div className="page-x flex flex-1 flex-col items-start justify-center gap-s24 overflow-y-auto py-s40 md:px-s40">
         <p className="type-title">{siteCopy.commerce.emptyBag}</p>
         <Button variant="text" onClick={closeCart}>
           {siteCopy.commerce.continueShopping}
@@ -50,19 +50,17 @@ export function CartDrawer() {
       </div>
 
       <div
-        className="page-x shrink-0 border-t border-grid pt-5 md:px-8"
+        className="page-x shrink-0 border-t border-grid pt-s24 md:px-s40"
         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
       >
-        <div className="mb-4 flex items-center justify-between text-sm">
-          <span className="font-utility text-label font-medium uppercase">
-            {siteCopy.commerce.subtotal}
-          </span>
+        <div className="mb-s16 flex items-center justify-between type-small">
+          <span className="type-label">{siteCopy.commerce.subtotal}</span>
           <span className="tabular-nums text-ink-muted">—</span>
         </div>
         <Button arrow fullWidth disabled>
           {siteCopy.commerce.checkout}
         </Button>
-        <p className="mt-3 text-center font-utility text-label uppercase text-ink-muted">
+        <p className="mt-s16 text-center type-caption text-ink-muted">
           {siteCopy.commerce.checkoutUnavailable}
         </p>
       </div>
