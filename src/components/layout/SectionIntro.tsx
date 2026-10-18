@@ -43,7 +43,7 @@ export function SectionIntro({
         ))}
       </h2>
       {support && (
-        <p className={`max-w-measure type-body text-ink-muted ${supportClassName}`}>{support}</p>
+        <p className={`max-w-measure type-lead text-ink-muted ${supportClassName}`}>{support}</p>
       )}
       {children}
     </div>

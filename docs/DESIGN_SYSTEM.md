@@ -10,18 +10,18 @@ Curious object. Quiet humour."). Tokens: `src/config/designTokens.ts` ↔ `src/s
 One role per job. Use the `type-<role>` utilities (`src/styles/global.css`); sizes live in
 `theme.css` and the role list is mirrored in `designTokens.ts` (`typeRoles`, parity-tested).
 
-| Utility          | Use                                                          | 390px | 1440px |
-| ---------------- | ------------------------------------------------------------ | ----- | ------ |
-| `type-hero`      | The one H1 — capitals, light, +0.035em, 1.05 leading (D-050) | 56px  | 86px   |
-| `type-editorial` | Story-band headings (spin, lifestyle, reveal, making)        | 38px  | 68px   |
-| `type-section`   | Functional section headings (shop, details)                  | 34px  | 52px   |
-| `type-title`     | Menu items, drawer empty state                               | 28px  | 40px   |
-| `type-price`     | Primary prices (hero, configurator)                          | 24px  | 28px   |
-| `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                   | 16px  | 16px   |
-| `type-lead`      | Hero support line only — regular capitals, +0.12em, 1.5      | 14px  | 14px   |
-| `type-small`     | Notes, card subtitles, spec values, footer info              | 14px  | 14px   |
-| `type-label`     | Uppercase utility: nav, buttons, section index, spec terms   | 11px  | 11px   |
-| `type-caption`   | Technical metadata: annotations, figure captions, badges     | 10px  | 10px   |
+| Utility          | Use                                                                       | 390px | 1440px |
+| ---------------- | ------------------------------------------------------------------------- | ----- | ------ |
+| `type-hero`      | The one H1 — capitals, light, +0.035em, 1.05 leading (D-050)              | 56px  | 86px   |
+| `type-editorial` | Story-band headings — capitals, +0.03em (D-051); `min(48px, 3.7vw)` ≥1024 | 32px  | 48px   |
+| `type-section`   | Functional section headings (shop, details) — capitals, +0.03em           | 28px  | 40px   |
+| `type-title`     | Menu items, drawer empty state                                            | 28px  | 40px   |
+| `type-price`     | Primary prices (hero, configurator)                                       | 24px  | 28px   |
+| `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                                | 16px  | 16px   |
+| `type-lead`      | Intro line under every hero/section heading — regular capitals, +0.12em   | 14px  | 14px   |
+| `type-small`     | Notes, card subtitles, spec values, footer info                           | 14px  | 14px   |
+| `type-label`     | Uppercase utility: nav, buttons, section index, spec terms                | 11px  | 11px   |
+| `type-caption`   | Technical metadata: annotations, figure captions, badges                  | 10px  | 10px   |
 
 Display roles (hero/editorial/section) are trimmed to cap height → baseline (`text-box`) and
 pulled left by their side bearing, so a heading's first stroke lines up with the label above it
@@ -72,7 +72,7 @@ on mobile (fewer circles, no side drawings panel, max two annotations).
 
 ## Section order
 
-01 Hero · 02 Spin · 03 Lifestyle + stand · 04 Reveal (D-047) · 05 Choose your setup · 06 Details · 07 Making · Footer.
+01 Hero · 02 Spin · 03 Reveal · 04 Lifestyle + stand (D-051) · 05 Choose your setup · 06 Details · 07 Making · Footer.
 
 ## Copy voice
 

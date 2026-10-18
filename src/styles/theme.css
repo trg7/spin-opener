@@ -24,12 +24,13 @@
   --text-hero: clamp(3.5rem, 6vw, 5.5rem);
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: 0.035em;
-  --text-editorial: clamp(2.375rem, 1.8rem + 2.6vw, 4.25rem);
-  --text-editorial--line-height: 1.02;
-  --text-editorial--letter-spacing: -0.025em;
-  --text-section: clamp(2.125rem, 1.7rem + 1.8vw, 3.25rem);
-  --text-section--line-height: 1.04;
-  --text-section--letter-spacing: -0.022em;
+  /* Section headings are capitals too (D-051): sized so each deliberate line fits its column */
+  --text-editorial: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-editorial--line-height: 1.05;
+  --text-editorial--letter-spacing: 0.03em;
+  --text-section: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+  --text-section--line-height: 1.05;
+  --text-section--letter-spacing: 0.03em;
   --text-title: clamp(1.75rem, 1.45rem + 1.2vw, 2.5rem);
   --text-title--line-height: 1.08;
   --text-title--letter-spacing: -0.02em;

@@ -38,6 +38,8 @@
   :root {
     --spacing-grid: 1.5rem;
     --spacing-section: 7.5rem;
+    /* Band copy is 5 columns from here: scale capitals with the column (longest line ≈ 9.5em) */
+    --text-editorial: min(3rem, 3.7vw);
   }
 }
 
@@ -80,7 +82,8 @@
   line-height: var(--text-editorial--line-height);
   letter-spacing: var(--text-editorial--letter-spacing);
   font-weight: 300;
-  margin-inline-start: -0.04em;
+  text-transform: uppercase;
+  margin-inline-start: -0.06em;
   text-box: trim-both cap alphabetic;
 }
 @utility type-section {
@@ -88,7 +91,8 @@
   line-height: var(--text-section--line-height);
   letter-spacing: var(--text-section--letter-spacing);
   font-weight: 300;
-  margin-inline-start: -0.04em;
+  text-transform: uppercase;
+  margin-inline-start: -0.06em;
   text-box: trim-both cap alphabetic;
 }
 @utility type-title {
@@ -101,7 +105,7 @@
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
 }
-/* Hero support line only: regular-weight capitals with open tracking. */
+/* Intro lines under hero and section headings: regular-weight capitals, open tracking (D-051). */
 @utility type-lead {
   font-size: var(--text-lead);
   line-height: var(--text-lead--line-height);
