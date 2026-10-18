@@ -34,16 +34,16 @@ Boards show prices, badges, colours, dimensions and claims that the brief forbid
 
 Requires Node ≥ 22.12 (`.nvmrc` → 24) and **npm ≥ 11** (npm 10.9 crashes resolving this tree; use `npx npm@11 install` if needed).
 
-| Command                | Purpose                                                                                                                                                               |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`          | Vite dev server                                                                                                                                                       |
-| `npm run typecheck`    | Strict TS (`tsc -b --noEmit`)                                                                                                                                         |
-| `npm run lint`         | ESLint (incl. no hardcoded `/assets/` paths)                                                                                                                          |
-| `npm test`             | Vitest (jsdom)                                                                                                                                                        |
-| `npm run build`        | Production build                                                                                                                                                      |
-| `npm run verify`       | All of the above — run before every commit                                                                                                                            |
-| `npm run format:check` | Prettier                                                                                                                                                              |
-| `npm run screenshots`  | Build + Playwright: static captures **and motion checks** (pin, reversibility, anchors, reduced motion, console errors) at 390/768/1440 → `screenshots/` (gitignored) |
+| Command                | Purpose                                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`          | Vite dev server                                                                                                                                                            |
+| `npm run typecheck`    | Strict TS (`tsc -b --noEmit`)                                                                                                                                              |
+| `npm run lint`         | ESLint (incl. no hardcoded `/assets/` paths)                                                                                                                               |
+| `npm test`             | Vitest (jsdom)                                                                                                                                                             |
+| `npm run build`        | Production build                                                                                                                                                           |
+| `npm run verify`       | All of the above — run before every commit                                                                                                                                 |
+| `npm run format:check` | Prettier                                                                                                                                                                   |
+| `npm run screenshots`  | Build + Playwright: static captures **and motion checks** (pin, reversibility, anchors, reduced motion, console errors) at 390/768/1280/1440 → `screenshots/` (gitignored) |
 
 ## 4. Folder ownership
 

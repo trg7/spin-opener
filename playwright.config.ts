@@ -17,6 +17,7 @@ export default defineConfig({
       },
     },
     { name: 'tablet-768', use: { viewport: { width: 768, height: 1024 }, deviceScaleFactor: 1 } },
+    { name: 'laptop-1280', use: { viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 } },
     { name: 'desktop-1440', use: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 } },
   ],
   webServer: {
