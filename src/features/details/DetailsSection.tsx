@@ -1,6 +1,6 @@
 import { useRef } from 'react'
+import { SectionIntro } from '@/components/layout/SectionIntro'
 import { SideView, TopView } from '@/components/technical/TechnicalDrawing'
-import { Eyebrow } from '@/components/ui/Eyebrow'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { siteCopy } from '@/content/siteCopy'
 import { assets } from '@/data/assetManifest'
@@ -21,52 +21,53 @@ export function DetailsSection() {
       ref={ref}
       id="details"
       aria-labelledby="details-heading"
-      className="page-x border-t border-grid py-20 lg:py-28"
+      className="page-x border-t border-grid py-section"
     >
-      <div className="page-container grid gap-12 lg:grid-cols-12 lg:gap-12">
-        <div className="flex flex-col gap-8 lg:col-span-4">
-          <div className="flex flex-col gap-4">
-            <Eyebrow>{copy.index}</Eyebrow>
-            <h2 id="details-heading" className="type-section">
-              {copy.heading}
-            </h2>
-          </div>
+      <div className="page-container flex flex-col gap-s64 lg:grid-page lg:gap-y-s64">
+        <div className="flex flex-col gap-s40 lg:col-span-4">
+          <SectionIntro
+            index={copy.index}
+            headingId="details-heading"
+            heading={[copy.heading]}
+            role="section"
+          />
           <dl className="divide-y divide-grid border-y border-grid">
             {copy.specs.map((s) => (
               <div
                 key={s.term}
                 data-details
-                className="grid grid-cols-[7.5rem_1fr] gap-4 py-4 text-sm"
+                className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-baseline gap-s16 py-s16"
               >
-                <dt className="font-utility text-label font-medium uppercase text-ink-muted">
-                  {s.term}
-                </dt>
-                <dd>{s.value}</dd>
+                <dt className="type-label text-ink-muted">{s.term}</dt>
+                <dd className="type-small">{s.value}</dd>
               </div>
             ))}
           </dl>
         </div>
 
-        <figure data-details className="flex flex-col gap-6 lg:col-span-8">
-          <div className="grid grid-cols-[1fr_auto] items-center gap-6 text-ink-muted md:gap-12">
+        {/* Drawings + close-ups share columns 6–12, so their edges line up. */}
+        <figure data-details className="flex flex-col gap-s24 lg:col-span-7 lg:col-start-6">
+          {/* 4 : 3 widths draw the top view at the same scale as the side elevation */}
+          <div className="grid grid-cols-[4fr_3fr] items-start gap-s24 text-ink-muted md:gap-s40">
             <SideView
-              className="w-full max-w-[24rem]"
+              className="w-full"
               widthLabel={copy.dimensionTbc}
               heightLabel={copy.dimensionTbc}
             />
-            <TopView className="w-24 md:w-40" />
+            <TopView className="w-full" />
           </div>
-          <figcaption className="font-utility text-label uppercase text-ink-muted">
+          <figcaption className="border-t border-grid pt-s16 type-caption text-ink-muted">
             {copy.drawingNote}
           </figcaption>
         </figure>
 
-        <ul className="grid grid-cols-3 gap-3 lg:col-span-8 lg:col-start-5 lg:gap-4">
-          {macros.map((m) => (
-            <li key={m.src} data-details>
+        {/* Mobile: a lead close-up over two squares (labels stay legible); ≥768: three squares */}
+        <ul className="grid grid-cols-2 gap-s8 md:grid-cols-3 md:gap-grid lg:col-span-7 lg:col-start-6">
+          {macros.map((m, i) => (
+            <li key={m.src} data-details className={i === 0 ? 'col-span-2 md:col-span-1' : ''}>
               <ResponsiveImage
                 asset={m}
-                className="aspect-[2/3] overflow-hidden lg:aspect-square"
+                className={`overflow-hidden md:aspect-square ${i === 0 ? 'aspect-[16/10]' : 'aspect-square'}`}
                 imgClassName="object-cover"
               />
             </li>

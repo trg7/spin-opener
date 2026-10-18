@@ -43,7 +43,7 @@ export function ResponsiveImage({
         aria-label={decorative ? undefined : asset.alt}
         className={`flex items-center justify-center border border-dashed border-grid bg-paper ${className}`}
       >
-        <span className="px-3 text-center font-utility text-label uppercase text-ink-muted">
+        <span className="px-s16 text-center type-caption text-ink-muted">
           {siteCopy.meta.imageUnavailable}
         </span>
       </div>
@@ -78,7 +78,7 @@ export function ResponsiveImage({
         />
       </picture>
       {showBadge && (
-        <span className="pointer-events-none absolute bottom-2 left-2 rounded-sm bg-warm-white/85 px-1.5 py-0.5 font-utility text-[0.5625rem] font-medium uppercase tracking-[0.12em] text-ink-muted">
+        <span className="pointer-events-none absolute bottom-s8 left-s8 whitespace-nowrap rounded-sm bg-warm-white/85 px-1.5 py-0.5 type-caption text-ink-muted">
           {siteCopy.meta.prototypeImage}
         </span>
       )}
