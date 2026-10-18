@@ -5,6 +5,30 @@ Curious object. Quiet humour."). Tokens: `src/config/designTokens.ts` ↔ `src/s
 
 ## Colour
 
+| Token                   | Hex       | Use                                                                                           |
+| ----------------------- | --------- | --------------------------------------------------------------------------------------------- |
+| `warm-white`            | `#F3F1ED` | Page background                                                                               |
+| `charcoal`              | `#222322` | Text, primary buttons (pill, charcoal fill, warm-white label), dark stand                     |
+| `teal`                  | `#008E96` | Product colour, focus ring, selected-state accents (sparingly — the product carries the teal) |
+| `grid`                  | `#D4D1CB` | Construction lines, hairlines, dividers, card borders                                         |
+| `sage`                  | `#7D806F` | Rare secondary accent (technical callouts)                                                    |
+| `ink-muted` _(derived)_ | `#5F5E5A` | Secondary text; ≥4.5:1 on warm-white and paper (tested)                                       |
+| `paper` _(derived)_     | `#F9F8F5` | Raised configurator option surfaces (boards show slightly lighter cards)                      |
+
+Photography supplies the remaining palette (terrazzo, timber, amber glass). No gradients.
+
+## Typography
+
+- **Family — Montserrat** (client, D-052; OFL, self-hosted via Fontsource — the Google Fonts
+  files, bundled). Supersedes the provisional Inter Tight (D-003).
+- **Weights** — Light 300 for large display type only (hero, section headings, prices, menu);
+  Regular 400 for everything read at text size (intro lines, body, labels, nav, buttons,
+  captions). Callout titles use 500 to sit just above their descriptions.
+- **Case** — headings and their intro lines in capitals (D-050, D-051); small functional text
+  (card subtitles, notes, spec values, gift line) stays sentence case for readability.
+- Montserrat capitals are wide: display sizes are set by the longest deliberate line in its column
+  and checked at 390 / 768 / 1024–1440 so no line wraps.
+
 ### Type roles (D-049)
 
 One role per job. Use the `type-<role>` utilities (`src/styles/global.css`); sizes live in
@@ -12,9 +36,9 @@ One role per job. Use the `type-<role>` utilities (`src/styles/global.css`); siz
 
 | Utility          | Use                                                                       | 390px | 1440px |
 | ---------------- | ------------------------------------------------------------------------- | ----- | ------ |
-| `type-hero`      | The one H1 — capitals, light, +0.035em, 1.05 leading (D-050)              | 56px  | 86px   |
-| `type-editorial` | Story-band headings — capitals, +0.03em (D-051); `min(48px, 3.7vw)` ≥1024 | 32px  | 48px   |
-| `type-section`   | Functional section headings (shop, details) — capitals, +0.03em           | 28px  | 40px   |
+| `type-hero`      | The one H1 — Light capitals, +0.035em, 1.05 leading (D-050)               | 52px  | 80px   |
+| `type-editorial` | Story-band headings — capitals, +0.03em (D-051); `min(48px, 3.4vw)` ≥1024 | 32px  | 48px   |
+| `type-section`   | Shop, details headings — capitals, +0.03em; `min(40px, 2.85vw)` ≥1024     | 28px  | 40px   |
 | `type-title`     | Menu items, drawer empty state                                            | 28px  | 40px   |
 | `type-price`     | Primary prices (hero, configurator)                                       | 24px  | 28px   |
 | `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                                | 16px  | 16px   |

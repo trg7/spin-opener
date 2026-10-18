@@ -45,7 +45,7 @@ export function HeroAnnotations({ image }: { image: ImageAsset }) {
             className="absolute"
             style={{ left: `${c.labelX}%`, top: `${c.elbow[1]}%` }}
           >
-            <p className="absolute bottom-full whitespace-nowrap pb-s8 type-label font-semibold text-charcoal">
+            <p className="absolute bottom-full whitespace-nowrap pb-s8 type-label font-medium text-charcoal">
               {a.index} — {a.title}
             </p>
             <p className="whitespace-nowrap pt-s8 type-caption font-normal text-ink-muted">

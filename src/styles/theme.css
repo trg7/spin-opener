@@ -12,16 +12,16 @@
   --color-ink-muted: #5f5e5a;
   --color-paper: #f9f8f5;
 
-  /* Typography (provisional family — see docs/DECISIONS.md) */
-  --font-display: 'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif;
-  --font-utility: 'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif;
+  /* Typography: Montserrat (client, D-052) — Light for display, Regular for everything else */
+  --font-display: 'Montserrat Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-utility: 'Montserrat Variable', 'Helvetica Neue', Arial, sans-serif;
 
   /*
    * Type roles (fluid 390px → 1440px). One role per job — see docs/DESIGN_SYSTEM.md §Type.
    * Use the `type-*` utilities in global.css, not these sizes directly.
    */
-  /* Capitals, sized to the viewport so "TO SPIN." keeps ~28% of the page width (D-050) */
-  --text-hero: clamp(3.5rem, 6vw, 5.5rem);
+  /* Capitals, sized to the viewport so "TO SPIN." clears the product stage (D-050, D-052) */
+  --text-hero: clamp(3.25rem, 5.5vw, 5rem);
   --text-hero--line-height: 1.05;
   --text-hero--letter-spacing: 0.035em;
   /* Section headings are capitals too (D-051): sized so each deliberate line fits its column */

@@ -27,9 +27,9 @@ export const colors = {
 export type ColorToken = keyof typeof colors
 
 export const fonts = {
-  /** Provisional: Inter Tight Variable (light weights) — pending approval, see DECISIONS.md */
-  display: "'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif",
-  utility: "'Inter Tight Variable', 'Helvetica Neue', Arial, sans-serif",
+  /** Montserrat (client, D-052): Light 300 for display roles, Regular 400 for everything else. */
+  display: "'Montserrat Variable', 'Helvetica Neue', Arial, sans-serif",
+  utility: "'Montserrat Variable', 'Helvetica Neue', Arial, sans-serif",
 } as const
 
 /**

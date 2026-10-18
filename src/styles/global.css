@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/inter-tight';
+@import '@fontsource-variable/montserrat';
 @import './theme.css';
 
 @layer base {
@@ -12,7 +12,7 @@
     background-color: var(--color-warm-white);
     color: var(--color-charcoal);
     font-family: var(--font-display);
-    font-weight: 350;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -38,8 +38,10 @@
   :root {
     --spacing-grid: 1.5rem;
     --spacing-section: 7.5rem;
-    /* Band copy is 5 columns from here: scale capitals with the column (longest line ≈ 9.5em) */
-    --text-editorial: min(3rem, 3.7vw);
+    /* Band copy is 5 columns from here: scale capitals with the column (longest line ≈ 10.4em) */
+    --text-editorial: min(3rem, 3.4vw);
+    /* …and keep functional headings a step below the story headings at every width */
+    --text-section: min(2.5rem, 2.85vw);
   }
 }
 
@@ -129,7 +131,7 @@
   font-size: var(--text-label);
   line-height: var(--text-label--line-height);
   letter-spacing: var(--text-label--letter-spacing);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
 }
 @utility type-caption {
@@ -137,7 +139,7 @@
   font-size: var(--text-caption);
   line-height: var(--text-caption--line-height);
   letter-spacing: var(--text-caption--letter-spacing);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
