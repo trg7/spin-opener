@@ -73,7 +73,9 @@ export function StoryBand({
         <div
           data-motion="media"
           className={`relative bleed-x overflow-hidden md:aspect-[16/10] md:h-auto md:max-h-none md:min-h-0 lg:col-start-6 lg:col-end-13 lg:aspect-auto lg:min-h-band lg:self-stretch lg:bleed-right ${
-            mobileOverlay ? 'h-[100svh] max-h-[52rem] min-h-[34rem]' : 'aspect-[4/5] max-h-[80svh]'
+            mobileOverlay
+              ? 'h-[calc(100svh-var(--header-h))] max-h-[52rem] min-h-[34rem]'
+              : 'aspect-[4/5] max-h-[80svh]'
           }`}
         >
           {media}

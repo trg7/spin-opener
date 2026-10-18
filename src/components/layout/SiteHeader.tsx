@@ -13,14 +13,31 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
   const iconBtn = 'relative flex size-11 items-center justify-center text-charcoal hover:text-teal'
 
   return (
-    <header className="page-x relative z-20">
-      <div className="page-container flex h-16 items-center justify-between md:h-20">
+    <header
+      data-site-header
+      className="page-x sticky top-0 z-40 border-b border-grid bg-warm-white"
+    >
+      {/* Equal outer tracks keep the wordmark on the viewport centre whatever sits either side */}
+      <div className="page-container grid h-(--header-h) grid-cols-[1fr_auto_1fr] items-center">
+        <div className="flex items-center justify-self-start">
+          {/* Menu below 1024 (D-008): native popover — light-dismiss + Esc for free */}
+          <button
+            type="button"
+            popoverTarget={MENU_ID}
+            aria-label={siteCopy.nav.menu}
+            className={`${iconBtn} -ml-3 lg:hidden`}
+          >
+            <MenuIcon />
+          </button>
+          <p className="hidden type-label lg:block">{siteCopy.brand.origin}</p>
+        </div>
+
         <a href="#top" aria-label={siteCopy.nav.home} className="-my-2 py-2">
           <Wordmark className="h-9 md:h-11" />
         </a>
 
-        <nav aria-label="Primary" className="flex items-center gap-1 md:gap-s40">
-          <ul className="hidden items-center gap-s40 md:flex">
+        <nav aria-label="Primary" className="flex items-center gap-s40 justify-self-end">
+          <ul className="hidden items-center gap-s40 lg:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
@@ -32,16 +49,6 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
               </li>
             ))}
           </ul>
-
-          {/* Mobile menu (D-008): native popover — light-dismiss + Esc for free */}
-          <button
-            type="button"
-            popoverTarget={MENU_ID}
-            aria-label={siteCopy.nav.menu}
-            className={`${iconBtn} md:hidden`}
-          >
-            <MenuIcon />
-          </button>
 
           <button
             type="button"
@@ -65,13 +72,14 @@ export function SiteHeader({ cartCount = 0 }: { cartCount?: number }) {
         popover="auto"
         className="page-x m-0 mt-0 w-full max-w-none border-b border-grid bg-warm-white pb-s24 [inset:0_0_auto_0]"
       >
-        <div className="flex h-16 items-center justify-end">
+        {/* Close sits where the menu button was */}
+        <div className="flex h-(--header-h) items-center">
           <button
             type="button"
             popoverTarget={MENU_ID}
             popoverTargetAction="hide"
             aria-label={siteCopy.nav.closeMenu}
-            className={`${iconBtn} -mr-3`}
+            className={`${iconBtn} -ml-3`}
           >
             <CloseIcon />
           </button>

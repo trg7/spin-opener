@@ -5,6 +5,7 @@ interface Props {
   variantId: string
   quantity: number
   fullWidth?: boolean
+  size?: 'sm' | 'md' | 'lg'
   className?: string
   label?: string
 }
@@ -18,6 +19,7 @@ export function AddToBagButton({
   variantId,
   quantity,
   fullWidth = false,
+  size = 'md',
   className = '',
   label,
 }: Props) {
@@ -25,6 +27,7 @@ export function AddToBagButton({
     <Button
       arrow
       fullWidth={fullWidth}
+      size={size}
       className={className}
       data-variant-id={variantId}
       data-quantity={quantity}

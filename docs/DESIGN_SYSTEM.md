@@ -10,21 +10,34 @@ Curious object. Quiet humour."). Tokens: `src/config/designTokens.ts` ↔ `src/s
 One role per job. Use the `type-<role>` utilities (`src/styles/global.css`); sizes live in
 `theme.css` and the role list is mirrored in `designTokens.ts` (`typeRoles`, parity-tested).
 
-| Utility          | Use                                                        | 390px | 1440px |
-| ---------------- | ---------------------------------------------------------- | ----- | ------ |
-| `type-hero`      | The one H1                                                 | 52px  | 104px  |
-| `type-editorial` | Story-band headings (spin, lifestyle, reveal, making)      | 38px  | 68px   |
-| `type-section`   | Functional section headings (shop, details)                | 34px  | 52px   |
-| `type-title`     | Menu items, drawer empty state                             | 28px  | 40px   |
-| `type-price`     | Primary prices (hero, configurator)                        | 24px  | 28px   |
-| `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                 | 16px  | 16px   |
-| `type-small`     | Notes, card subtitles, spec values, footer info            | 14px  | 14px   |
-| `type-label`     | Uppercase utility: nav, buttons, section index, spec terms | 11px  | 11px   |
-| `type-caption`   | Technical metadata: annotations, figure captions, badges   | 10px  | 10px   |
+| Utility          | Use                                                          | 390px | 1440px |
+| ---------------- | ------------------------------------------------------------ | ----- | ------ |
+| `type-hero`      | The one H1 — capitals, light, +0.035em, 1.05 leading (D-050) | 56px  | 86px   |
+| `type-editorial` | Story-band headings (spin, lifestyle, reveal, making)        | 38px  | 68px   |
+| `type-section`   | Functional section headings (shop, details)                  | 34px  | 52px   |
+| `type-title`     | Menu items, drawer empty state                               | 28px  | 40px   |
+| `type-price`     | Primary prices (hero, configurator)                          | 24px  | 28px   |
+| `type-body`      | Support paragraphs (`max-w-measure`, 34ch)                   | 16px  | 16px   |
+| `type-lead`      | Hero support line only — regular capitals, +0.12em, 1.5      | 14px  | 14px   |
+| `type-small`     | Notes, card subtitles, spec values, footer info              | 14px  | 14px   |
+| `type-label`     | Uppercase utility: nav, buttons, section index, spec terms   | 11px  | 11px   |
+| `type-caption`   | Technical metadata: annotations, figure captions, badges     | 10px  | 10px   |
 
 Display roles (hero/editorial/section) are trimmed to cap height → baseline (`text-box`) and
 pulled left by their side bearing, so a heading's first stroke lines up with the label above it
 and spacing tokens measure optically. Browsers without `text-box` fall back to slightly looser gaps.
+
+### Header and hero (D-050)
+
+- **Header** — sticky, hairline bottom border, height `--header-h` (64px → 80px at 768). Three
+  tracks `1fr auto 1fr`, so the wordmark sits on the viewport centre regardless of the sides.
+  ≥1024: origin line left, nav + bag right. <1024: menu button left, bag right. Anchors and the
+  spin pin offset by the header (`scroll-padding-top`, `headerOffset()`).
+- **Hero ≥1280** — copy cols 1–4; square product stage cols 4–9 (centred on the viewport, under
+  the wordmark; fits the screen height); drawings cols 11–12 behind a hairline divider.
+  1024–1279: no drawings, stage cols 5–12. Stage: one construction circle (75% of the stage),
+  vertical axis, two outer ticks. Two callouts (01 Spin → upper stem, 02 Open → zinc ring), placed
+  from `features/hero/heroGeometry.ts` in stage %. Drawings borderless at one scale.
 
 ## Identity
 

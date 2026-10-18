@@ -98,5 +98,5 @@ export const TopView = ({ className }: { className?: string }) => (
 )
 
 export const BottomView = ({ className }: { className?: string }) => (
-  <RingsView radii={bottomViewRadii} className={className ?? ''} />
+  <RingsView radii={bottomViewRadii} crosshair className={className ?? ''} />
 )

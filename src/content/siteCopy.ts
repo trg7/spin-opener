@@ -7,6 +7,8 @@
 export const siteCopy = {
   brand: {
     name: 'SPIN OPENER',
+    /** Header (desktop) and hero foot (mobile). Client copy, 2026-10-18 (D-050). */
+    origin: 'Made in Melbourne.',
   },
   meta: {
     prototypeImage: 'Prototype image',
@@ -23,18 +25,20 @@ export const siteCopy = {
     home: 'SPIN OPENER home',
   },
   hero: {
-    /** "Made to spin." [brief] — split as on every board. */
+    index: '01',
+    /** "Made to spin." [brief] — two lines; set in capitals by the hero type role (D-050). */
     headingLines: ['Made', 'to spin.'],
-    /** Rendered one sentence per line on mobile (as on the UX board), inline on desktop. */
+    /** Desktop line breaks from the approved hero (D-050); runs on naturally on mobile. */
     supportLines: [
-      'A spinning top.',
-      'A bottle opener.',
-      'A little something for your coffee table.',
+      'A spinning top. A bottle opener.',
+      'A little something for your',
+      'coffee table.',
     ], // [brief]
-    origin: 'Designed in Melbourne', // [board]
-    annotations: { spin: 'Smooth, balanced spin', opener: 'Opens bottles' }, // [board]
-    /** Desktop feature row. All three restate the brief's positioning — no new claims. */
-    features: ['Designed in Melbourne', '3D printed in small batches', 'A thoughtful gift'], // [board]
+    /** Exactly two callouts (D-050). The ring under the disc is the opener (D-033). */
+    annotations: [
+      { id: 'spin', index: '01', title: 'Spin', lines: ['A smooth,', 'balanced spin.'] },
+      { id: 'open', index: '02', title: 'Open', lines: ['Doubles as', 'a bottle opener.'] },
+    ],
     views: { top: 'Top view', side: 'Side view', bottom: 'Bottom view' }, // [board]
   },
   spin: {

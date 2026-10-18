@@ -57,6 +57,7 @@ export const typeRoles = [
   'section',
   'title',
   'body',
+  'lead',
   'small',
   'price',
   'label',

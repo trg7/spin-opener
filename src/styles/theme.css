@@ -20,9 +20,10 @@
    * Type roles (fluid 390px → 1440px). One role per job — see docs/DESIGN_SYSTEM.md §Type.
    * Use the `type-*` utilities in global.css, not these sizes directly.
    */
-  --text-hero: clamp(3.25rem, 2.2rem + 4.4vw, 6.5rem);
-  --text-hero--line-height: 0.98;
-  --text-hero--letter-spacing: -0.03em;
+  /* Capitals, sized to the viewport so "TO SPIN." keeps ~28% of the page width (D-050) */
+  --text-hero: clamp(3.5rem, 6vw, 5.5rem);
+  --text-hero--line-height: 1.05;
+  --text-hero--letter-spacing: 0.035em;
   --text-editorial: clamp(2.375rem, 1.8rem + 2.6vw, 4.25rem);
   --text-editorial--line-height: 1.02;
   --text-editorial--letter-spacing: -0.025em;
@@ -34,6 +35,9 @@
   --text-title--letter-spacing: -0.02em;
   --text-body: 1rem;
   --text-body--line-height: 1.5;
+  --text-lead: 0.875rem;
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: 0.12em;
   --text-small: 0.875rem;
   --text-small--line-height: 1.45;
   --text-price: clamp(1.5rem, 1.4rem + 0.4vw, 1.75rem);

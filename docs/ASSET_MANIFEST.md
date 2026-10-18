@@ -30,6 +30,10 @@ Status: `placeholder-ai` = provisional, may be geometrically wrong · `missing` 
 | `detailTip`             | `product/detail-tip.webp`                    | Details: tip                | 1020,530,1134,703        | 114×173           | 0.66  | placeholder-ai | Macro ≥1200px                                                                                          |
 | `manufacturingPrintBed` | `manufacturing/manufacturing-print-bed.webp` | Manufacturing               | 856,770,1150,998         | 294×228           | 1.29  | placeholder-ai | **Real** Melbourne production photo/video ≥2400px                                                      |
 
+### Masks (`imageMasks`)
+
+`product/hero-beauty-mask.png` (304×410, alpha only) — soft silhouette of the hero placeholder: product, zinc ring, steel tip and contact shadow. Applied as CSS `mask-image` so the photo's beige backdrop doesn't show as a box; the photo's pixels are untouched. Regenerate with `python3 -I scripts/assets/hero_mask.py public/assets/product/hero-beauty.webp public/assets/product/hero-beauty-mask.png`. Delete when a transparent render replaces the photo, and re-measure the callout anchors in `features/hero/heroGeometry.ts` (D-050).
+
 ## Mobile portrait crops (UX concept board)
 
 Cropped from `references/boards/ux-concept-board.png` phone screens, **below** the baked headings and

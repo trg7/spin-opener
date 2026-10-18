@@ -1,11 +1,18 @@
 import type { RefObject } from 'react'
 import { motion } from '@/config/designTokens'
 import { gsap, useGSAP } from '@/motion/gsap'
+import { headerOffset } from '@/motion/headerOffset'
 import { fadeUpOnEnter } from '@/motion/presets'
 
-/** Pin from the top if the section fills the viewport, otherwise hold it centred. */
-const pinStart = (section: HTMLElement) => () =>
-  section.offsetHeight >= window.innerHeight ? 'top top' : 'center center'
+/**
+ * Pin just below the sticky header if the section fills the space under it, otherwise hold it
+ * centred in that space.
+ */
+const pinStart = (section: HTMLElement) => () => {
+  const header = headerOffset()
+  const visible = window.innerHeight - header
+  return section.offsetHeight >= visible ? `top ${header}px` : `center ${header + visible / 2}px`
+}
 
 const pinEnd = (lengthPct: number) => () => `+=${(window.innerHeight * lengthPct) / 100}`
 
@@ -66,7 +73,7 @@ export function useSpinMotion(scope: RefObject<HTMLElement | null>) {
           scrollTrigger: {
             trigger: section,
             pin: true,
-            start: 'top top',
+            start: pinStart(section),
             end: pinEnd(motion.spinPinLength.mobile),
             scrub: motion.scrub,
             anticipatePin: 1,

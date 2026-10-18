@@ -26,6 +26,13 @@
 :root {
   --page-max: 90rem;
   --page-inset: max(var(--spacing-gutter), (100vw - var(--page-max)) / 2);
+  /* Sticky header height; anchors and the spin pin offset by it */
+  --header-h: 4rem;
+}
+@media (min-width: 48rem) {
+  :root {
+    --header-h: 5rem;
+  }
 }
 @media (min-width: 64rem) {
   :root {
@@ -64,7 +71,8 @@
   line-height: var(--text-hero--line-height);
   letter-spacing: var(--text-hero--letter-spacing);
   font-weight: 300;
-  margin-inline-start: -0.045em;
+  text-transform: uppercase;
+  margin-inline-start: -0.06em;
   text-box: trim-both cap alphabetic;
 }
 @utility type-editorial {
@@ -92,6 +100,14 @@
 @utility type-body {
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
+}
+/* Hero support line only: regular-weight capitals with open tracking. */
+@utility type-lead {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+  letter-spacing: var(--text-lead--letter-spacing);
+  font-weight: 400;
+  text-transform: uppercase;
 }
 @utility type-small {
   font-size: var(--text-small);
@@ -166,11 +182,6 @@
     margin-top: var(--spacing-s40);
   }
 
-  /* Feathers a rectangular placeholder photo into the page (real renders will be cutouts). */
-  .feather-radial {
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
-  }
-
   /* Native <dialog> drawer */
   .drawer {
     transform: translateX(100%);
@@ -207,6 +218,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
   }
   body:has(dialog[open]) {
     overflow: hidden;

@@ -15,6 +15,8 @@ interface Props {
   decorative?: boolean
   /** Hide the "Prototype image" badge (e.g. tiny thumbnails). */
   hideBadge?: boolean
+  /** Alpha mask (from `imageMasks`) stretched over the image. */
+  maskSrc?: string | undefined
 }
 
 /**
@@ -30,6 +32,7 @@ export function ResponsiveImage({
   priority = false,
   decorative = false,
   hideBadge = false,
+  maskSrc,
 }: Props) {
   const [failed, setFailed] = useState(false)
   const isPlaceholder =
@@ -75,6 +78,11 @@ export function ResponsiveImage({
           decoding="async"
           onError={() => setFailed(true)}
           className={`block h-full w-full ${imgClassName}`}
+          style={
+            maskSrc
+              ? { maskImage: `url(${maskSrc})`, maskSize: '100% 100%', maskRepeat: 'no-repeat' }
+              : undefined
+          }
         />
       </picture>
       {showBadge && (

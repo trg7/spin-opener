@@ -49,11 +49,7 @@ export function useHeroMotion(scope: RefObject<HTMLElement | null>) {
             ctaAt,
           )
           .from(q('[data-hero="annotations"]'), { autoAlpha: 0, duration: 0.6 }, 0.8)
-          .from(
-            q('[data-hero="views"] li, [data-hero="features"] li'),
-            { autoAlpha: 0, y: 12, duration: 0.5, stagger },
-            0.6,
-          )
+          .from(q('[data-hero="views"] li'), { autoAlpha: 0, y: 12, duration: 0.5, stagger }, 0.6)
 
         // Scroll push-in (separate property set from the intro: scale only)
         gsap.to(q('[data-hero="product"]'), {

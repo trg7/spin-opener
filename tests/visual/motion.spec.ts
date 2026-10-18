@@ -72,15 +72,38 @@ test('hero intro', async ({ page }, info) => {
   await page.screenshot({ path: `${dir}/hero-settled.png` })
 })
 
-test('anchor navigation lands on #shop past the pin', async ({ page }) => {
+test('anchor navigation lands #shop just below the sticky header, past the pin', async ({
+  page,
+}) => {
   await page.goto('/')
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => (location.hash = '#shop'))
   await page.waitForTimeout(1500)
-  const top = await page.evaluate(
-    () => document.querySelector('#shop')?.getBoundingClientRect().top ?? Infinity,
-  )
-  expect(Math.abs(top)).toBeLessThan(4)
+  const { top, header } = await page.evaluate(() => ({
+    top: document.querySelector('#shop')?.getBoundingClientRect().top ?? Infinity,
+    header: document.querySelector<HTMLElement>('[data-site-header]')?.offsetHeight ?? 0,
+  }))
+  expect(header).toBeGreaterThan(0)
+  expect(Math.abs(top - header)).toBeLessThan(4)
+})
+
+test('header stays put and keeps the wordmark centred', async ({ page }) => {
+  await page.goto('/')
+  await page.waitForLoadState('networkidle')
+  await page.evaluate(() => window.scrollTo({ top: 3000, behavior: 'instant' }))
+  await page.waitForTimeout(300)
+  const { top, logoCentre, vw } = await page.evaluate(() => {
+    const header = document.querySelector<HTMLElement>('[data-site-header]')
+    const logo = header?.querySelector('img')?.getBoundingClientRect()
+    if (!header || !logo) return { top: NaN, logoCentre: NaN, vw: 0 }
+    return {
+      top: header.getBoundingClientRect().top,
+      logoCentre: logo.left + logo.width / 2,
+      vw: document.documentElement.clientWidth,
+    }
+  })
+  expect(top).toBe(0)
+  expect(Math.abs(logoCentre - vw / 2)).toBeLessThan(1)
 })
 
 test.describe('reduced motion', () => {

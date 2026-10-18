@@ -51,7 +51,7 @@ export function StickyPurchaseBar({ product }: { product: Product }) {
           <span className="type-label">{product.title}</span>
           <Price money={variant.price} className="type-small text-ink-muted" />
         </div>
-        <AddToBagButton variantId={variant.id} quantity={1} className="h-11 px-s24" />
+        <AddToBagButton variantId={variant.id} quantity={1} size="sm" />
       </div>
     </div>
   )

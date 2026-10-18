@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { assets } from '@/data/assetManifest'
+import { assets, imageMasks } from '@/data/assetManifest'
 import { products } from '@/data/products'
 
 const all = Object.entries(assets)
@@ -17,6 +17,10 @@ describe('asset manifest', () => {
 
   it('missing assets have no src', () => {
     for (const [, a] of all) if (a.status === 'missing') expect(a.src).toBeNull()
+  })
+
+  it.each(Object.entries(imageMasks))('%s mask exists in public/', (_key, src) => {
+    expect(existsSync(resolve(__dirname, '../public', `.${src}`))).toBe(true)
   })
 
   it('every product imageKey resolves', () => {
